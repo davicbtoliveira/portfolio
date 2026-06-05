@@ -28,4 +28,11 @@ describe("home page", () => {
     const moduleScripts = root.querySelectorAll('script[type="module"]');
     expect(moduleScripts.length).toBe(0);
   });
+
+  it("renders the seed project inside a card linking to its detail route", () => {
+    const projectLinks = root.querySelectorAll('a[href="/projects/example"]');
+    expect(projectLinks.length).toBeGreaterThanOrEqual(1);
+    const linkText = Array.from(projectLinks).map((a) => a.text);
+    expect(linkText.some((t) => t?.includes("Example project"))).toBe(true);
+  });
 });

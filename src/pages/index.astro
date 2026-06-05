@@ -1,11 +1,19 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
+import FeaturedProjects from "../components/FeaturedProjects.astro";
+import { getFeaturedProjectEntries } from "../lib/projects";
 
 const name = "Davi Oliveira";
 const tagline = "Building minimal software.";
+
+const featuredEntries = await getFeaturedProjectEntries();
 ---
 
-<BaseLayout title={`${name} — building minimal software`} description={`${name} — ${tagline}.`}>
+<BaseLayout
+  title={`${name} — building minimal software`}
+  description={`${name} — ${tagline}.`}
+>
   <Hero name={name} tagline={tagline} />
+  <FeaturedProjects projects={featuredEntries} />
 </BaseLayout>
