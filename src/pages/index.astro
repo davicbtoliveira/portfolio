@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+
+const name = "Davi Oliveira";
+const tagline = "Building minimal software.";
+---
+
+<BaseLayout title={`${name} — building minimal software`} description={`${name} — ${tagline}.`}>
+  <Hero name={name} tagline={tagline} />
+</BaseLayout>

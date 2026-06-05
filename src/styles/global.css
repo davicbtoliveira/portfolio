@@ -1,0 +1,24 @@
+@import "tailwindcss";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-bg: light-dark(#fafafa, #0a0a0a);
+  --color-fg: light-dark(#0a0a0a, #ededed);
+  --color-muted: light-dark(#525252, #a1a1aa);
+  --color-border: light-dark(#e5e5e5, #262626);
+  --color-accent: light-dark(#059669, #10b981);
+  --color-accent-hover: light-dark(#047857, #34d399);
+  --color-accent-soft: light-dark(#d1fae5, #064e3b);
+
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, monospace;
+}
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+}
