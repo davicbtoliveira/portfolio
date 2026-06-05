@@ -25,3 +25,21 @@ export type ProjectEntry = {
   id: string;
   data: Project;
 };
+
+export const postSchema = z.object({
+  title: z.string(),
+  description: z.string().min(40).max(160),
+  pubDate: z.date(),
+  updatedDate: z.date().optional(),
+  tags: z.array(z.string()).default([]),
+  draft: z.boolean().default(false),
+  featured: z.boolean().default(false),
+  cover: z.string().optional(),
+});
+
+export type Post = z.infer<typeof postSchema>;
+
+export type PostEntry = {
+  id: string;
+  data: Post;
+};

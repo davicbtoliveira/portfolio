@@ -2,12 +2,15 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import FeaturedProjects from "../components/FeaturedProjects.astro";
+import RecentPosts from "../components/RecentPosts.astro";
 import { getFeaturedProjectEntries } from "../lib/projects";
+import { getRecentPostEntries } from "../lib/posts";
 
 const name = "Davi Oliveira";
 const tagline = "Building minimal software.";
 
 const featuredEntries = await getFeaturedProjectEntries();
+const recentPostEntries = await getRecentPostEntries();
 ---
 
 <BaseLayout
@@ -16,4 +19,5 @@ const featuredEntries = await getFeaturedProjectEntries();
 >
   <Hero name={name} tagline={tagline} />
   <FeaturedProjects projects={featuredEntries} />
+  <RecentPosts posts={recentPostEntries} />
 </BaseLayout>

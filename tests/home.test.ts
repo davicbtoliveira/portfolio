@@ -35,4 +35,11 @@ describe("home page", () => {
     const linkText = Array.from(projectLinks).map((a) => a.text);
     expect(linkText.some((t) => t?.includes("Example project"))).toBe(true);
   });
+
+  it("renders the seed post inside a card linking to its detail route", () => {
+    const postLinks = root.querySelectorAll('a[href="/blog/example"]');
+    expect(postLinks.length).toBeGreaterThanOrEqual(1);
+    const linkText = Array.from(postLinks).map((a) => a.text);
+    expect(linkText.some((t) => t?.includes("An example blog post"))).toBe(true);
+  });
 });
