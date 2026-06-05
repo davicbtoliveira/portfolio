@@ -1,0 +1,149 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { findRelatedPosts } from "../../lib/content-relationships";
+import type { PostEntry, ProjectEntry } from "../../content/schemas";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.id.replace(/\.mdx?$/, "") },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const slug = project.id.replace(/\.mdx?$/, "");
+const projectEntry: ProjectEntry = { id: slug, data: project.data };
+const posts = await getCollection("blog");
+const postEntries: PostEntry[] = posts.map((post) => ({
+  id: post.id.replace(/\.mdx?$/, ""),
+  data: post.data,
+}));
+const relatedPosts = findRelatedPosts(projectEntry, postEntries);
+---
+
+<BaseLayout
+  title={`${project.data.title} — Projects`}
+  description={project.data.summary}
+  canonicalPath={`/projects/${slug}`}
+>
+  <main class="project-detail">
+    <header>
+      <p class="eyebrow">Project</p>
+      <h1>{project.data.title}</h1>
+      <p class="summary">{project.data.summary}</p>
+      <dl class="meta">
+        <div>
+          <dt>Year</dt>
+          <dd>{project.data.year}</dd>
+        </div>
+        <div>
+          <dt>Status</dt>
+          <dd>{project.data.status}</dd>
+        </div>
+        <div>
+          <dt>Role</dt>
+          <dd>{project.data.role}</dd>
+        </div>
+        <div>
+          <dt>Tech</dt>
+          <dd>{project.data.tech.join(", ")}</dd>
+        </div>
+      </dl>
+      <div class="links">
+        {project.data.links.repo && <a href={project.data.links.repo}>Repo</a>}
+        {project.data.links.demo && <a href={project.data.links.demo}>Demo</a>}
+        {project.data.links.post && <a href={project.data.links.post}>Post</a>}
+      </div>
+    </header>
+
+    <article class="prose">
+      <Content />
+    </article>
+
+    {
+      relatedPosts.length > 0 && (
+        <section class="related" aria-labelledby="related-heading">
+          <h2 id="related-heading">Articles about this project</h2>
+          <ul>
+            {relatedPosts.map((post) => (
+              <li>
+                <a href={`/blog/${post.id}`}>{post.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </main>
+</BaseLayout>
+
+<style>
+  .project-detail {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+  }
+  .eyebrow {
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    margin: 0 0 0.75rem;
+  }
+  h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    line-height: 1.1;
+    margin: 0 0 1rem;
+  }
+  .summary {
+    color: var(--color-fg);
+    font-size: 1.25rem;
+    line-height: 1.7;
+    margin: 0 0 2rem;
+  }
+  .meta {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    margin: 0 0 1.5rem;
+  }
+  dt {
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+  }
+  dd {
+    margin: 0;
+  }
+  .links {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  a {
+    color: var(--color-accent);
+  }
+  .prose {
+    border-top: 1px solid var(--color-border);
+    color: var(--color-muted);
+    line-height: 1.8;
+    padding-top: 2rem;
+  }
+  .related {
+    border-top: 1px solid var(--color-border);
+    margin-top: 3rem;
+    padding-top: 2rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+    margin: 0 0 1rem;
+  }
+  ul {
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+</style>
