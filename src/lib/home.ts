@@ -2,16 +2,22 @@ import type { Project } from "../content/schemas";
 
 export const PICK_FEATURED_PROJECTS_DEFAULT_LIMIT = 6;
 
+export type ProjectEntry = {
+  id: string;
+  data: Project;
+};
+
 export function pickFeaturedProjects(
-  entries: Project[],
+  entries: ProjectEntry[],
   options: { limit?: number } = {},
-): Project[] {
+): ProjectEntry[] {
   const limit = options.limit ?? PICK_FEATURED_PROJECTS_DEFAULT_LIMIT;
   return entries
-    .filter((entry) => entry.featured === true)
+    .filter((entry) => entry.data.featured === true)
     .sort((a, b) => {
-      if (a.year !== b.year) return b.year - a.year;
-      return a.title.localeCompare(b.title);
+      const yearDiff = b.data.year - a.data.year;
+      if (yearDiff !== 0) return yearDiff;
+      return a.data.title.localeCompare(b.data.title);
     })
     .slice(0, limit);
 }
