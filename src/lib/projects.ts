@@ -5,6 +5,7 @@ import {
   PICK_FEATURED_PROJECTS_DEFAULT_LIMIT,
 } from "./home";
 import { listProjects } from "./project-listing";
+import { enrichProjects, type EnrichedProjectEntry } from "./github-enrichment";
 
 export { pickFeaturedProjects, PICK_FEATURED_PROJECTS_DEFAULT_LIMIT };
 export { listProjects };
@@ -22,13 +23,16 @@ export async function getFeaturedProjectEntries(): Promise<ProjectEntry[]> {
   );
 }
 
-export async function getProjectEntries(filters: Parameters<typeof listProjects>[1] = {}): Promise<ProjectEntry[]> {
+export async function getProjectEntries(
+  filters: Parameters<typeof listProjects>[1] = {},
+): Promise<EnrichedProjectEntry[]> {
   const entries = await getCollection("projects");
-  return listProjects(
+  const listed = listProjects(
     entries.map((entry) => ({
       id: stripMdxExtension(entry.id),
       data: entry.data,
     })),
     filters,
   );
+  return enrichProjects(listed, { token: process.env.GITHUB_TOKEN });
 }
