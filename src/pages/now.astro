@@ -1,0 +1,55 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Now — Davi Oliveira"
+  description="Current focus and active work for Davi Oliveira."
+>
+  <main class="page">
+    <p class="eyebrow">Now</p>
+    <h1>Current focus</h1>
+    <p class="lead">
+      Building this portfolio as a compact, content-first Astro site and keeping
+      the implementation close to its architecture document.
+    </p>
+    <ul>
+      <li>Shipping static portfolio routes from MDX content.</li>
+      <li>Writing technical notes that connect projects to decisions.</li>
+      <li>Keeping deploy and analytics boring through Cloudflare Pages.</li>
+    </ul>
+  </main>
+</BaseLayout>
+
+<style>
+  .page {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+  }
+  .eyebrow {
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    margin: 0 0 0.75rem;
+  }
+  h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    line-height: 1.1;
+    margin: 0 0 1rem;
+  }
+  .lead,
+  li {
+    line-height: 1.7;
+  }
+  .lead {
+    color: var(--color-fg);
+    font-size: 1.25rem;
+    margin: 0 0 2rem;
+  }
+  ul {
+    color: var(--color-muted);
+    margin: 0;
+    padding-left: 1.25rem;
+  }
+</style>

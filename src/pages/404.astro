@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Not found — Davi Oliveira"
+  description="The requested page could not be found."
+>
+  <main class="not-found">
+    <p class="code">404</p>
+    <h1>Page not found</h1>
+    <p>The page you requested does not exist or moved.</p>
+    <a href="/">Return home</a>
+  </main>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: grid;
+    min-height: 55vh;
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+    place-content: center;
+    text-align: center;
+  }
+  .code {
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    margin: 0 0 0.75rem;
+  }
+  h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    line-height: 1.1;
+    margin: 0 0 1rem;
+  }
+  p {
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin: 0 0 2rem;
+  }
+  a {
+    color: var(--color-accent);
+  }
+</style>
