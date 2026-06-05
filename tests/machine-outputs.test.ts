@@ -22,7 +22,7 @@ describe("machine-readable outputs", () => {
 
   it("publishes sitemap and robots without draft routes", () => {
     expect(sitemap).toContain("https://dcbto.dev/blog/example");
-    expect(sitemap).toContain("https://dcbto.dev/projects/example");
+    expect(sitemap).toContain("https://dcbto.dev/projects/imageforge/");
     expect(sitemap).not.toContain("/blog/draft");
     expect(robots).toContain("Sitemap: https://dcbto.dev/sitemap-index.xml");
   });

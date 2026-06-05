@@ -8,21 +8,18 @@ describe("project detail", () => {
 
   beforeAll(() => {
     execSync("corepack pnpm build", { stdio: "pipe" });
-    root = parse(readFileSync("dist/projects/example/index.html", "utf-8"));
+    root = parse(readFileSync("dist/projects/heartdevs-check-in/index.html", "utf-8"));
   }, 120_000);
 
   it("renders project metadata and MDX body", () => {
-    expect(root.querySelector("h1")?.text).toContain("Example project");
-    expect(root.text).toContain("wip");
-    expect(root.text).toContain("creator");
-    expect(root.text).toContain("typescript");
-    expect(root.text).toContain("A seed project that exists only");
+    expect(root.querySelector("h1")?.text).toContain("HeartDevs check-in");
+    expect(root.text).toContain("maintained");
+    expect(root.text).toContain("contributor");
+    expect(root.text).toContain("php");
+    expect(root.text).toContain("Manual and numeric-code check-in flows");
   });
 
   it("renders related articles from project frontmatter", () => {
-    expect(root.text).toContain("Articles about this project");
-    expect(root.querySelector('a[href="/blog/example"]')?.text).toContain(
-      "An example blog post",
-    );
+    expect(root.text).not.toContain("Articles about this project");
   });
 });

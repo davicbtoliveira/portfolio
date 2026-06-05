@@ -12,7 +12,7 @@ describe("architecture completion guardrails", () => {
       "dist/index.html",
       "dist/about/index.html",
       "dist/projects/index.html",
-      "dist/projects/example/index.html",
+      "dist/projects/imageforge/index.html",
       "dist/blog/index.html",
       "dist/blog/example/index.html",
       "dist/now/index.html",
@@ -23,7 +23,7 @@ describe("architecture completion guardrails", () => {
       "dist/sitemap-0.xml",
       "dist/robots.txt",
       "dist/og/blog-example.png",
-      "dist/og/project-example.png",
+      "dist/og/project-imageforge.png",
     ].forEach((path) => expect(existsSync(path), path).toBe(true));
   });
 

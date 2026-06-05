@@ -11,7 +11,7 @@ describe("OG image routes", () => {
   beforeAll(() => {
     execSync("corepack pnpm build", { stdio: "pipe" });
     post = parse(readFileSync("dist/blog/example/index.html", "utf-8"));
-    project = parse(readFileSync("dist/projects/example/index.html", "utf-8"));
+    project = parse(readFileSync("dist/projects/imageforge/index.html", "utf-8"));
     postPng = readFileSync("dist/og/blog-example.png");
   }, 120_000);
 
@@ -21,7 +21,7 @@ describe("OG image routes", () => {
     );
     expect(
       project.querySelector('meta[property="og:image"]')?.getAttribute("content"),
-    ).toBe("https://dcbto.dev/og/project-example.png");
+    ).toBe("https://dcbto.dev/og/project-imageforge.png");
   });
 
   it("generates PNG output", () => {

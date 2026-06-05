@@ -19,11 +19,8 @@ describe("blog post", () => {
     expect(root.text).toContain("A seed post that exists only");
   });
 
-  it("renders owning project badge when referenced by a project", () => {
-    expect(root.text).toContain("Part of project");
-    expect(root.querySelector('a[href="/projects/example"]')?.text).toContain(
-      "Example project",
-    );
+  it("omits project badge when no project references the post", () => {
+    expect(root.text).not.toContain("Part of project");
   });
 
   it("does not generate draft post detail pages", () => {

@@ -61,11 +61,11 @@ describe("home page", () => {
     expect(analytics?.getAttribute("content")).toBe("configure-token-in-production");
   });
 
-  it("renders the seed project inside a card linking to its detail route", () => {
-    const projectLinks = root.querySelectorAll('a[href="/projects/example"]');
+  it("renders a featured real project inside a card linking to its detail route", () => {
+    const projectLinks = root.querySelectorAll('a[href="/projects/imageforge"]');
     expect(projectLinks.length).toBeGreaterThanOrEqual(1);
     const linkText = Array.from(projectLinks).map((a) => a.text);
-    expect(linkText.some((t) => t?.includes("Example project"))).toBe(true);
+    expect(linkText.some((t) => t?.includes("ImageForge"))).toBe(true);
   });
 
   it("renders the seed post inside a card linking to its detail route", () => {
