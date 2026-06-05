@@ -47,6 +47,7 @@ const minutes = readingTime(post.body ?? "");
   title={`${post.data.title} — Blog`}
   description={post.data.description}
   canonicalPath={`/blog/${slug}`}
+  imagePath={`/og/blog-${slug}.png`}
   ogType="article"
 >
   <main class="post-detail">

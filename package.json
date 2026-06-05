@@ -24,9 +24,12 @@
     "@astrojs/solid-js": "^6.0.1",
     "@fontsource-variable/geist": "^5.2.9",
     "@fontsource-variable/geist-mono": "^5.2.8",
+    "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^5.18.2",
+    "satori": "^0.26.0",
+    "sharp": "^0.34.5",
     "solid-js": "^1.9.13",
     "tailwindcss": "^4.3.0"
   }

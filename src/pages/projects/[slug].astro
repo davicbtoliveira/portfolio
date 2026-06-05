@@ -28,6 +28,7 @@ const relatedPosts = findRelatedPosts(projectEntry, postEntries);
   title={`${project.data.title} — Projects`}
   description={project.data.summary}
   canonicalPath={`/projects/${slug}`}
+  imagePath={`/og/project-${slug}.png`}
 >
   <main class="project-detail">
     <header>
