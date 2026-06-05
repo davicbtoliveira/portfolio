@@ -2,9 +2,8 @@ import { describe, it, expect } from "vitest";
 import {
   pickFeaturedProjects,
   PICK_FEATURED_PROJECTS_DEFAULT_LIMIT,
-  type ProjectEntry,
 } from "../../src/lib/home";
-import type { Project } from "../../src/content/schemas";
+import type { Project, ProjectEntry } from "../../src/content/schemas";
 
 const makeProject = (overrides: Partial<Project> = {}): Project => ({
   title: "Untitled",

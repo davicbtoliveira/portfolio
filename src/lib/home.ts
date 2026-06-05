@@ -1,11 +1,6 @@
-import type { Project } from "../content/schemas";
+import type { ProjectEntry } from "../content/schemas";
 
 export const PICK_FEATURED_PROJECTS_DEFAULT_LIMIT = 6;
-
-export type ProjectEntry = {
-  id: string;
-  data: Project;
-};
 
 export function pickFeaturedProjects(
   entries: ProjectEntry[],

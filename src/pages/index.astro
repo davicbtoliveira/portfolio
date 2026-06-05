@@ -1,20 +1,13 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import FeaturedProjects from "../components/FeaturedProjects.astro";
-import { pickFeaturedProjects } from "../lib/home";
+import { getFeaturedProjectEntries } from "../lib/projects";
 
 const name = "Davi Oliveira";
 const tagline = "Building minimal software.";
 
-const projectEntries = await getCollection("projects");
-const featuredEntries = pickFeaturedProjects(
-  projectEntries.map((entry) => ({
-    id: entry.id.replace(/\.mdx?$/, ""),
-    data: entry.data,
-  })),
-);
+const featuredEntries = await getFeaturedProjectEntries();
 ---
 
 <BaseLayout

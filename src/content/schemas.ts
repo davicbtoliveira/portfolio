@@ -20,3 +20,8 @@ export const projectSchema = z.object({
 });
 
 export type Project = z.infer<typeof projectSchema>;
+
+export type ProjectEntry = {
+  id: string;
+  data: Project;
+};
