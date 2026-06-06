@@ -7,7 +7,7 @@ describe("home page", () => {
   let root: HTMLElement;
 
   beforeAll(() => {
-    execSync("pnpm build", { stdio: "pipe" });
+    execSync("corepack pnpm build", { stdio: "pipe" });
     const html = readFileSync("dist/index.html", "utf-8");
     root = parse(html);
   }, 120_000);
@@ -24,9 +24,41 @@ describe("home page", () => {
     expect(html?.getAttribute("data-theme")).toBe("dark");
   });
 
-  it("ships no client-side module scripts from the home route", () => {
+  it("renders shared SEO metadata for link previews", () => {
+    expect(root.querySelector('link[rel="canonical"]')?.getAttribute("href")).toBe(
+      "https://dcbto.dev/",
+    );
+    expect(
+      root
+        .querySelector('meta[property="og:title"]')
+        ?.getAttribute("content"),
+    ).toBe("Davi Oliveira — building minimal software");
+    expect(
+      root
+        .querySelector('meta[name="twitter:card"]')
+        ?.getAttribute("content"),
+    ).toBe("summary_large_image");
+  });
+
+  it("ships only the shared client module script", () => {
     const moduleScripts = root.querySelectorAll('script[type="module"]');
-    expect(moduleScripts.length).toBe(0);
+    expect(moduleScripts.length).toBe(1);
+  });
+
+  it("includes a persisted theme toggle and pre-paint theme bootstrap", () => {
+    const toggle = root.querySelector("button[data-theme-toggle]");
+    expect(toggle).not.toBeNull();
+    expect(toggle?.getAttribute("aria-label")).toBe("Toggle color theme");
+
+    const bootstrap = root.querySelector("script[data-theme-bootstrap]");
+    expect(bootstrap).not.toBeNull();
+    expect(bootstrap?.text).toContain("localStorage.getItem(\"theme\")");
+    expect(bootstrap?.text).toContain("document.documentElement.dataset.theme");
+  });
+
+  it("documents the analytics insertion point without requiring credentials", () => {
+    const analytics = root.querySelector("meta[name=\"cf-web-analytics\"]");
+    expect(analytics?.getAttribute("content")).toBe("configure-token-in-production");
   });
 
   it("renders the seed project inside a card linking to its detail route", () => {

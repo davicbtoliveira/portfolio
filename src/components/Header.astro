@@ -1,4 +1,6 @@
 ---
+import ThemeToggle from "./ThemeToggle";
+
 const links = [
   { href: "/", label: "Home" },
   { href: "/blog", label: "Blog" },
@@ -10,15 +12,18 @@ const links = [
 <header>
   <nav>
     <a href="/" class="brand">davi</a>
-    <ul>
-      {
-        links.map((link) => (
-          <li>
-            <a href={link.href}>{link.label}</a>
-          </li>
-        ))
-      }
-    </ul>
+    <div class="nav-actions">
+      <ul>
+        {
+          links.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <ThemeToggle client:load />
+    </div>
   </nav>
 </header>
 
@@ -47,12 +52,18 @@ const links = [
     margin: 0;
     padding: 0;
   }
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
   a {
     color: var(--color-muted);
     text-decoration: none;
     transition: color 200ms ease-out;
   }
-  a:hover {
+  a:hover,
+  a:focus-visible {
     color: var(--color-accent);
   }
 </style>
