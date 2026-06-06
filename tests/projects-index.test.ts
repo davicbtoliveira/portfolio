@@ -7,7 +7,7 @@ describe("projects index", () => {
   let root: HTMLElement;
 
   beforeAll(() => {
-    execSync("corepack pnpm build", { stdio: "pipe" });
+    execSync("pnpm build", { stdio: "pipe" });
     root = parse(readFileSync("dist/projects/index.html", "utf-8"));
   }, 120_000);
 
@@ -22,12 +22,22 @@ describe("projects index", () => {
     expect(root.text).toContain("creator");
     expect(root.text).toContain("python");
     expect(root.text).toContain("php");
-    expect(root.querySelector('a[href="https://github.com/davicbtoliveira/imageforge"]')).not.toBeNull();
-    expect(root.querySelector('a[href="https://github.com/he4rt/heartdevs.com"]')).not.toBeNull();
+    expect(
+      root.querySelector(
+        'a[href="https://github.com/davicbtoliveira/imageforge"]',
+      ),
+    ).not.toBeNull();
+    expect(
+      root.querySelector('a[href="https://github.com/he4rt/heartdevs.com"]'),
+    ).not.toBeNull();
   });
 
   it("renders filter links for project status and tech", () => {
-    expect(root.querySelector('a[href="/projects?status=active"]')?.text).toContain("active");
-    expect(root.querySelector('a[href="/projects?tech=go"]')?.text).toContain("go");
+    expect(
+      root.querySelector('a[href="/projects?status=active"]')?.text,
+    ).toContain("active");
+    expect(root.querySelector('a[href="/projects?tech=go"]')?.text).toContain(
+      "go",
+    );
   });
 });

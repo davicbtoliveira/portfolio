@@ -4,7 +4,7 @@ import { existsSync, readFileSync } from "node:fs";
 
 describe("architecture completion guardrails", () => {
   beforeAll(() => {
-    execSync("corepack pnpm build", { stdio: "pipe" });
+    execSync("pnpm build", { stdio: "pipe" });
   }, 120_000);
 
   it("builds every architecture route and output", () => {

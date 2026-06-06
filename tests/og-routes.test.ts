@@ -9,18 +9,22 @@ describe("OG image routes", () => {
   let postPng: Buffer;
 
   beforeAll(() => {
-    execSync("corepack pnpm build", { stdio: "pipe" });
+    execSync("pnpm build", { stdio: "pipe" });
     post = parse(readFileSync("dist/blog/example/index.html", "utf-8"));
-    project = parse(readFileSync("dist/projects/imageforge/index.html", "utf-8"));
+    project = parse(
+      readFileSync("dist/projects/imageforge/index.html", "utf-8"),
+    );
     postPng = readFileSync("dist/og/blog-example.png");
   }, 120_000);
 
   it("links post and project pages to generated OG images", () => {
-    expect(post.querySelector('meta[property="og:image"]')?.getAttribute("content")).toBe(
-      "https://dcbto.dev/og/blog-example.png",
-    );
     expect(
-      project.querySelector('meta[property="og:image"]')?.getAttribute("content"),
+      post.querySelector('meta[property="og:image"]')?.getAttribute("content"),
+    ).toBe("https://dcbto.dev/og/blog-example.png");
+    expect(
+      project
+        .querySelector('meta[property="og:image"]')
+        ?.getAttribute("content"),
     ).toBe("https://dcbto.dev/og/project-imageforge.png");
   });
 

@@ -14,7 +14,7 @@ describe("static pages", () => {
   const roots = new Map<string, HTMLElement>();
 
   beforeAll(() => {
-    execSync("corepack pnpm build", { stdio: "pipe" });
+    execSync("pnpm build", { stdio: "pipe" });
     for (const [name, path] of Object.entries(pages)) {
       roots.set(name, parse(readFileSync(path, "utf-8")));
     }
@@ -42,7 +42,9 @@ describe("static pages", () => {
   it("renders styled 404 with a home link", () => {
     const root = roots.get("notFound");
     expect(root?.querySelector("h1")?.text).toContain("Page not found");
-    const homeLinks = root?.querySelectorAll('a[href="/"]').map((link) => link.text);
+    const homeLinks = root
+      ?.querySelectorAll('a[href="/"]')
+      .map((link) => link.text);
     expect(homeLinks).toContain("Return home");
   });
 

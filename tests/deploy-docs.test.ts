@@ -15,9 +15,12 @@ describe("Cloudflare deployment ops", () => {
     const workflow = readFileSync(".github/workflows/deploy.yml", "utf-8");
     expect(workflow).toContain("pull_request:");
     expect(workflow).toContain("branches: [main]");
-    expect(workflow).toContain("corepack pnpm check");
-    expect(workflow).toContain("corepack pnpm test");
-    expect(workflow).toContain("corepack pnpm build");
+    expect(workflow).toContain("uses: pnpm/action-setup@v4");
+    expect(workflow).not.toContain("pnpm/actions-setup");
+    expect(workflow).toContain("pnpm install --frozen-lockfile");
+    expect(workflow).toContain("pnpm check");
+    expect(workflow).toContain("pnpm test");
+    expect(workflow).toContain("pnpm build");
     expect(workflow).toContain("wrangler pages deploy dist");
   });
 });

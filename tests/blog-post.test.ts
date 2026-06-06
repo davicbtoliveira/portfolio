@@ -7,7 +7,7 @@ describe("blog post", () => {
   let root: HTMLElement;
 
   beforeAll(() => {
-    execSync("corepack pnpm build", { stdio: "pipe" });
+    execSync("pnpm build", { stdio: "pipe" });
     root = parse(readFileSync("dist/blog/example/index.html", "utf-8"));
   }, 120_000);
 

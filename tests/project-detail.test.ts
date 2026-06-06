@@ -7,7 +7,7 @@ describe("project detail", () => {
   let root: HTMLElement;
 
   beforeAll(() => {
-    execSync("corepack pnpm build", { stdio: "pipe" });
+    execSync("pnpm build", { stdio: "pipe" });
     root = parse(readFileSync("dist/projects/heartdevs/index.html", "utf-8"));
   }, 120_000);
 

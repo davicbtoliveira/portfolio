@@ -8,7 +8,7 @@ describe("machine-readable outputs", () => {
   let robots: string;
 
   beforeAll(() => {
-    execSync("corepack pnpm build", { stdio: "pipe" });
+    execSync("pnpm build", { stdio: "pipe" });
     rss = readFileSync("dist/rss.xml", "utf-8");
     sitemap = readFileSync("dist/sitemap-0.xml", "utf-8");
     robots = readFileSync("dist/robots.txt", "utf-8");

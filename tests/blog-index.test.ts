@@ -7,7 +7,7 @@ describe("blog index", () => {
   let root: HTMLElement;
 
   beforeAll(() => {
-    execSync("corepack pnpm build", { stdio: "pipe" });
+    execSync("pnpm build", { stdio: "pipe" });
     root = parse(readFileSync("dist/blog/index.html", "utf-8"));
   }, 120_000);
 
@@ -19,7 +19,9 @@ describe("blog index", () => {
   });
 
   it("renders tag filter links", () => {
-    expect(root.querySelector('a[href="/blog?tag=meta"]')?.text).toContain("meta");
+    expect(root.querySelector('a[href="/blog?tag=meta"]')?.text).toContain(
+      "meta",
+    );
   });
 
   it("excludes draft posts and draft-only tags", () => {
