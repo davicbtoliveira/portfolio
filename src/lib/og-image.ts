@@ -1,10 +1,12 @@
 import { readFile } from "node:fs/promises";
+import { createRequire } from "node:module";
 import { Resvg } from "@resvg/resvg-js";
 import sharp from "sharp";
 import satori from "satori";
 
 const WIDTH = 1200;
 const HEIGHT = 630;
+const require = createRequire(import.meta.url);
 
 type OgKind = "Blog" | "Project" | "Page";
 
@@ -31,7 +33,10 @@ export function buildOgImageModel(input: OgImageInput): OgImageModel {
 
 async function loadFont(): Promise<ArrayBuffer> {
   if (!fontData) {
-    const buffer = await readFile("/usr/share/fonts/noto/NotoSans-Regular.ttf");
+    const fontPath = require.resolve(
+      "roboto-fontface/fonts/roboto/Roboto-Regular.woff",
+    );
+    const buffer = await readFile(fontPath);
     fontData = buffer.buffer.slice(
       buffer.byteOffset,
       buffer.byteOffset + buffer.byteLength,

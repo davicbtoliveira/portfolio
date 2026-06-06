@@ -28,6 +28,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "^5.18.2",
+    "roboto-fontface": "^0.10.0",
     "satori": "^0.26.0",
     "sharp": "^0.34.5",
     "solid-js": "^1.9.13",
