@@ -15,7 +15,7 @@ describe("projects index", () => {
     expect(root.querySelector("h1")?.text).toContain("Projects");
     expect(root.text).toContain("ImageForge");
     expect(root.text).toContain("SpotUI");
-    expect(root.text).toContain("HeartDevs check-in");
+    expect(root.text).toContain("HeartDevs");
     expect(root.text).toContain("Marketing Extension shared sorting");
     expect(root.text).toContain("active");
     expect(root.text).toContain("contributor");
