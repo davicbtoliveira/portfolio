@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="About — Davi Oliveira"
+  description="Background, stack, OSS work, and contact for Davi Oliveira."
+>
+  <main class="page">
+    <section>
+      <p class="eyebrow">About</p>
+      <h1>About Me</h1>
+      <p class="lead">
+        I build backend software, focused in maintanability, reliability and
+        performance first software
+      </p>
+    </section>
+
+    <section>
+      <h2>Stack</h2>
+      <p>
+        Go, Python, PHP, NodeJS, JavaScript, TypeScript, PostgreSQL, Linux, and
+        Cloudflare.
+      </p>
+      <br />
+      <p>
+        I prefer small modules, content-first interfaces, and production paths
+        that can be explained without ceremony.
+      </p>
+    </section>
+
+    <section>
+      <h2>OSS</h2>
+      <p>
+        My OSS work focuses on developer tooling, portfolio infrastructure, and
+        practical automation that removes repeated manual work.
+      </p>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <p>
+        <a href="mailto:davicbtoliveira@gmail.com">Email</a>
+
+        <a href="https://linkedin.com/in/dcbto">Linkedin</a>
+      </p>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .page {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+  }
+  section + section {
+    margin-top: 2.5rem;
+  }
+  .eyebrow {
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    margin: 0 0 0.75rem;
+  }
+  h1,
+  h2 {
+    line-height: 1.1;
+    margin: 0 0 1rem;
+  }
+  h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+  }
+  h2 {
+    font-size: 1.25rem;
+  }
+  p {
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .lead {
+    color: var(--color-fg);
+    font-size: 1.25rem;
+  }
+  a {
+    color: var(--color-accent);
+    margin-right: 10px;
+  }
+</style>

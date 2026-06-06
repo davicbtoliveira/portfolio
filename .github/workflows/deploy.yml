@@ -1,0 +1,62 @@
+name: Deploy
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Setup pnpm config
+        run:
+          pnpm config set store-dir "$PNPM_CACHE_FOLDER"
+          # Makes sure the pnpm store path exists (which is exactly what setup-node cares about)
+      - name: Verify PNPM Cache Directory
+        run: |
+          PNPM_STORE_PATH="$( pnpm store path --silent )"
+          if [ ! -d "$PNPM_STORE_PATH" ]; then
+            echo "PNPM store directory does not exist, creating it."
+            mkdir -p "$PNPM_STORE_PATH"
+          else
+            echo "PNPM store directory exists."
+          fi
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.13
+          cache: "pnpm"
+      - run: npm install -g corepack@latest
+      - run: corepack enable
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm test
+      - run: pnpm build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLIC_CF_WEB_ANALYTICS_TOKEN: ${{ vars.PUBLIC_CF_WEB_ANALYTICS_TOKEN }}
+      - name: Deploy Cloudflare Pages preview
+        if: github.event_name == 'pull_request'
+        run: >
+          npx wrangler pages deploy dist
+          --project-name "${{ secrets.CLOUDFLARE_PAGES_PROJECT_NAME }}"
+          --branch "${{ github.head_ref }}"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Deploy Cloudflare Pages production
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: >
+          npx wrangler pages deploy dist
+          --project-name "${{ secrets.CLOUDFLARE_PAGES_PROJECT_NAME }}"
+          --branch main
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

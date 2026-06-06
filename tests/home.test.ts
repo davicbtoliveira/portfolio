@@ -7,7 +7,7 @@ describe("home page", () => {
   let root: HTMLElement;
 
   beforeAll(() => {
-    execSync("corepack pnpm build", { stdio: "pipe" });
+    execSync("pnpm build", { stdio: "pipe" });
     const html = readFileSync("dist/index.html", "utf-8");
     root = parse(html);
   }, 120_000);
@@ -18,25 +18,21 @@ describe("home page", () => {
     expect(h1?.text).toContain("Davi Oliveira");
   });
 
-  it("sets data-theme=\"dark\" on the <html> element", () => {
+  it('sets data-theme="dark" on the <html> element', () => {
     const html = root.querySelector("html");
     expect(html).not.toBeNull();
     expect(html?.getAttribute("data-theme")).toBe("dark");
   });
 
   it("renders shared SEO metadata for link previews", () => {
-    expect(root.querySelector('link[rel="canonical"]')?.getAttribute("href")).toBe(
-      "https://dcbto.dev/",
-    );
     expect(
-      root
-        .querySelector('meta[property="og:title"]')
-        ?.getAttribute("content"),
+      root.querySelector('link[rel="canonical"]')?.getAttribute("href"),
+    ).toBe("https://dcbto.dev/");
+    expect(
+      root.querySelector('meta[property="og:title"]')?.getAttribute("content"),
     ).toBe("Davi Oliveira — building minimal software");
     expect(
-      root
-        .querySelector('meta[name="twitter:card"]')
-        ?.getAttribute("content"),
+      root.querySelector('meta[name="twitter:card"]')?.getAttribute("content"),
     ).toBe("summary_large_image");
   });
 
@@ -52,26 +48,32 @@ describe("home page", () => {
 
     const bootstrap = root.querySelector("script[data-theme-bootstrap]");
     expect(bootstrap).not.toBeNull();
-    expect(bootstrap?.text).toContain("localStorage.getItem(\"theme\")");
+    expect(bootstrap?.text).toContain('localStorage.getItem("theme")');
     expect(bootstrap?.text).toContain("document.documentElement.dataset.theme");
   });
 
   it("documents the analytics insertion point without requiring credentials", () => {
-    const analytics = root.querySelector("meta[name=\"cf-web-analytics\"]");
-    expect(analytics?.getAttribute("content")).toBe("configure-token-in-production");
+    const analytics = root.querySelector('meta[name="cf-web-analytics"]');
+    expect(analytics?.getAttribute("content")).toBe(
+      "configure-token-in-production",
+    );
   });
 
-  it("renders the seed project inside a card linking to its detail route", () => {
-    const projectLinks = root.querySelectorAll('a[href="/projects/example"]');
+  it("renders a featured real project inside a card linking to its detail route", () => {
+    const projectLinks = root.querySelectorAll(
+      'a[href="/projects/imageforge"]',
+    );
     expect(projectLinks.length).toBeGreaterThanOrEqual(1);
     const linkText = Array.from(projectLinks).map((a) => a.text);
-    expect(linkText.some((t) => t?.includes("Example project"))).toBe(true);
+    expect(linkText.some((t) => t?.includes("ImageForge"))).toBe(true);
   });
 
   it("renders the seed post inside a card linking to its detail route", () => {
     const postLinks = root.querySelectorAll('a[href="/blog/example"]');
     expect(postLinks.length).toBeGreaterThanOrEqual(1);
     const linkText = Array.from(postLinks).map((a) => a.text);
-    expect(linkText.some((t) => t?.includes("An example blog post"))).toBe(true);
+    expect(linkText.some((t) => t?.includes("An example blog post"))).toBe(
+      true,
+    );
   });
 });

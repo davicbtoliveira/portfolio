@@ -1,0 +1,56 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Uses — Davi Oliveira"
+  description="Hardware, software, and tools used by Davi Oliveira."
+>
+  <main class="page">
+    <p class="eyebrow">Uses</p>
+    <h1>Tools I use</h1>
+    <section>
+      <h2>Hardware</h2>
+      <p>Laptop-first setup with external display, mechanical keyboard, and a quiet desk.</p>
+    </section>
+    <section>
+      <h2>Software</h2>
+      <p>Linux, Hyprland, Neovim, Git, pnpm, Astro, TypeScript, and Cloudflare.</p>
+    </section>
+    <section>
+      <h2>Workflow</h2>
+      <p>Small branches, conventional commits, test-first slices, and static deploy previews.</p>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .page {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+  }
+  section + section {
+    margin-top: 2rem;
+  }
+  .eyebrow {
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    margin: 0 0 0.75rem;
+  }
+  h1 {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    line-height: 1.1;
+    margin: 0 0 2.5rem;
+  }
+  h2 {
+    font-size: 1.25rem;
+    margin: 0 0 0.75rem;
+  }
+  p {
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+</style>
