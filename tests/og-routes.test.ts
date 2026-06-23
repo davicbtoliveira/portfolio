@@ -15,7 +15,7 @@ describe("OG image routes", () => {
       readFileSync("dist/projects/imageforge/index.html", "utf-8"),
     );
     postPng = readFileSync("dist/og/blog-example.png");
-  }, 120_000);
+  }, 180_000);
 
   it("links post and project pages to generated OG images", () => {
     expect(

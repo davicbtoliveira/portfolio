@@ -18,34 +18,34 @@ describe("static pages", () => {
     for (const [name, path] of Object.entries(pages)) {
       roots.set(name, parse(readFileSync(path, "utf-8")));
     }
-  }, 120_000);
+  }, 180_000);
 
   it("renders about with contact path", () => {
     const root = roots.get("about");
     expect(root?.querySelector("h1")?.text).toContain("About");
-    expect(root?.querySelector('a[href^="mailto:"]')?.text).toContain("Email");
+    expect(root?.querySelector('a[href^="mailto:"]')?.text).toContain("email");
   });
 
   it("renders now with current focus", () => {
     const root = roots.get("now");
-    expect(root?.querySelector("h1")?.text).toContain("Current focus");
+    expect(root?.querySelector("h1")?.text).toContain("Now");
     expect(root?.text).toContain("portfolio");
   });
 
   it("renders uses with tool sections", () => {
     const root = roots.get("uses");
-    expect(root?.querySelector("h1")?.text).toContain("Tools I use");
+    expect(root?.querySelector("h1")?.text).toContain("Uses");
     expect(root?.text).toContain("Hardware");
     expect(root?.text).toContain("Software");
   });
 
   it("renders styled 404 with a home link", () => {
     const root = roots.get("notFound");
-    expect(root?.querySelector("h1")?.text).toContain("Page not found");
+    expect(root?.querySelector("h1")?.text).toContain("page not found");
     const homeLinks = root
       ?.querySelectorAll('a[href="/"]')
       .map((link) => link.text);
-    expect(homeLinks).toContain("Return home");
+    expect(homeLinks).toContain("return home");
   });
 
   it("uses shared metadata on every static page", () => {

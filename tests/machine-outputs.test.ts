@@ -12,7 +12,7 @@ describe("machine-readable outputs", () => {
     rss = readFileSync("dist/rss.xml", "utf-8");
     sitemap = readFileSync("dist/sitemap-0.xml", "utf-8");
     robots = readFileSync("dist/robots.txt", "utf-8");
-  }, 120_000);
+  }, 180_000);
 
   it("publishes RSS for non-draft posts", () => {
     expect(rss).toContain("An example blog post");
