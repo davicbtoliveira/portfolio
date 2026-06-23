@@ -22,5 +22,8 @@ pnpm-debug.log*
 !.vscode/extensions.json
 .idea/
 
+# package managers
+bun.lock
+
 # typescript
 *.tsbuildinfo
