@@ -11,9 +11,9 @@ const { posts } = Astro.props;
 
 {
   posts.length > 0 && (
-    <section class="recent-posts">
-      <h2>Recent Posts</h2>
-      <div class="grid">
+    <section>
+      <h2 class="section-heading">Recent Posts</h2>
+      <div>
         {posts.map((entry) => (
           <BlogCard post={entry.data} href={`/blog/${entry.id}`} />
         ))}
@@ -21,22 +21,3 @@ const { posts } = Astro.props;
     </section>
   )
 }
-
-<style>
-  .recent-posts {
-    max-width: 64rem;
-    margin: 0 auto;
-    padding: 2rem 1.5rem;
-  }
-  h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0 0 1.5rem;
-    letter-spacing: -0.01em;
-  }
-  .grid {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-  }
-</style>

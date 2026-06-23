@@ -11,11 +11,11 @@ const { projects } = Astro.props;
 
 {
   projects.length > 0 && (
-    <section class="featured-projects">
-      <h2>Featured Projects</h2>
-      <div class="grid">
+    <section>
+      <h2 class="section-heading">Featured Projects</h2>
+      <div class="project-list">
         {projects.map((entry) => (
-          <ProjectCard project={entry.data} href={`/projects/${entry.id}`} />
+          <ProjectCard project={entry.data} href={`/projects/${entry.id}`} stats={entry.stats} />
         ))}
       </div>
     </section>
@@ -23,20 +23,7 @@ const { projects } = Astro.props;
 }
 
 <style>
-  .featured-projects {
-    max-width: 64rem;
-    margin: 0 auto;
-    padding: 2rem 1.5rem;
-  }
-  h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0 0 1.5rem;
-    letter-spacing: -0.01em;
-  }
-  .grid {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  .project-list {
+    margin: 0;
   }
 </style>

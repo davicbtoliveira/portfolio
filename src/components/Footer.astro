@@ -1,22 +1,48 @@
 ---
 const year = new Date().getFullYear();
+const socialLinks = [
+  { href: "https://github.com/davicbtoliveira", label: "github" },
+  { href: "https://linkedin.com/in/dcbto", label: "linkedin" },
+  { href: "mailto:davicbtoliveira@gmail.com", label: "email" },
+];
 ---
 
 <footer>
-  <p>© {year} Davi Oliveira</p>
+  <hr class="section-divider" />
+  <div class="footer-inner">
+    <nav aria-label="Social links">
+      {socialLinks.map((link) => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+    </nav>
+    <p>© {year} davi oliveira</p>
+  </div>
 </footer>
 
 <style>
-  footer {
-    border-top: 1px solid var(--color-border);
-    padding: 2rem 1.5rem;
-    max-width: 64rem;
-    margin: 4rem auto 0;
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    gap: 1rem;
+  }
+  nav {
+    display: flex;
+    gap: 1rem;
+  }
+  .section-divider {
+    margin: 2.5rem 0 0.75rem;
   }
   p {
-    color: var(--color-muted);
-    font-size: 0.875rem;
     margin: 0;
-    text-align: center;
+  }
+  @media (max-width: 36rem) {
+    .footer-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
   }
 </style>

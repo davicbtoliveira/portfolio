@@ -17,7 +17,11 @@ const recentPostEntries = await getRecentPostEntries();
   title={`${name} — building minimal software`}
   description={`${name} — ${tagline}.`}
 >
-  <Hero name={name} tagline={tagline} />
-  <FeaturedProjects projects={featuredEntries} />
-  <RecentPosts posts={recentPostEntries} />
+  <div class="page">
+    <Hero name={name} tagline={tagline} />
+    <hr class="section-divider" />
+    <FeaturedProjects projects={featuredEntries} />
+    <hr class="section-divider" />
+    <RecentPosts posts={recentPostEntries} />
+  </div>
 </BaseLayout>

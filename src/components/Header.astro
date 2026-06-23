@@ -2,17 +2,17 @@
 import ThemeToggle from "./ThemeToggle";
 
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/blog", label: "Blog" },
-  { href: "/projects", label: "Projects" },
-  { href: "/about", label: "About" },
+  { href: "/", label: "home" },
+  { href: "/blog", label: "blog" },
+  { href: "/projects", label: "projects" },
+  { href: "/about", label: "about" },
 ];
 ---
 
 <header>
   <nav>
-    <a href="/" class="brand">davi</a>
-    <div class="nav-actions">
+    <a href="/" class="brand">~/portfolio</a>
+    <div class="nav-group">
       <ul>
         {
           links.map((link) => (
@@ -35,35 +35,37 @@ const links = [
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 1.5rem;
-    max-width: 64rem;
+    padding: 0.75rem 1.5rem;
+    max-width: 52rem;
     margin: 0 auto;
+    font-size: 0.8125rem;
   }
   .brand {
-    font-family: var(--font-mono);
-    font-weight: 600;
-    color: var(--color-fg);
+    color: var(--color-muted);
+    font-weight: 400;
     text-decoration: none;
+  }
+  .brand:hover {
+    color: var(--color-accent);
   }
   ul {
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  .nav-actions {
+  .nav-group {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
   }
-  a {
+  nav a {
     color: var(--color-muted);
     text-decoration: none;
-    transition: color 200ms ease-out;
   }
-  a:hover,
-  a:focus-visible {
+  nav a:hover,
+  nav a:focus-visible {
     color: var(--color-accent);
   }
 </style>

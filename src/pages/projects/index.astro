@@ -25,25 +25,31 @@ const techs = Array.from(
   title="Projects — Davi Oliveira"
   description="A browsable index of projects by Davi Oliveira."
 >
-  <main class="projects-page">
-    <header class="page-header">
-      <p class="eyebrow">Projects</p>
-      <h1>Projects</h1>
-      <p>
-        OSS and personal work, listed with status, role, stack, and available
-        links.
-      </p>
-    </header>
+  <div class="page">
+    <h1 class="section-heading">Projects</h1>
+    <p class="page-desc">
+      OSS and personal work, listed with status, role, stack, and links.
+    </p>
 
     <nav aria-label="Project filters" class="filters">
-      <a href="/projects">All</a>
-      {statuses.map((item) => <a href={`/projects?status=${item}`}>{item}</a>)}
-      {techs.map((item) => <a href={`/projects?tech=${item}`}>{item}</a>)}
+      <div class="filter-group">
+        <span class="filter-label">status</span>
+        <a href="/projects" class:list={{ active: !statusParam && !techParam }}>all</a>
+        {statuses.map((item) => (
+          <a href={`/projects?status=${item}`} class:list={{ active: status === item && !techParam }}>{item}</a>
+        ))}
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">tech</span>
+        {techs.map((item) => (
+          <a href={`/projects?tech=${item}`} class:list={{ active: techParam === item && !statusParam }}>{item}</a>
+        ))}
+      </div>
     </nav>
 
     {
       projects.length > 0 ? (
-        <div class="grid">
+        <div>
           {projects.map((entry) => (
             <ProjectCard
               project={entry.data}
@@ -53,66 +59,54 @@ const techs = Array.from(
           ))}
         </div>
       ) : (
-        <p class="empty">No projects match this filter.</p>
+        <p class="empty">no projects match this filter</p>
       )
     }
-  </main>
+  </div>
 </BaseLayout>
 
 <style>
-  .projects-page {
-    max-width: 64rem;
-    margin: 0 auto;
-    padding: 4rem 1.5rem;
-  }
-  .page-header {
-    max-width: 44rem;
-    margin-bottom: 2rem;
-  }
-  .eyebrow {
-    color: var(--color-accent);
-    font-family: var(--font-mono);
-    font-size: 0.875rem;
-    margin: 0 0 0.75rem;
-  }
-  h1 {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    line-height: 1.1;
-    margin: 0 0 1rem;
-  }
-  p {
+  .page-desc {
     color: var(--color-muted);
-    line-height: 1.7;
-    margin: 0;
+    font-size: 0.9375rem;
+    margin: -0.75rem 0 1.5rem;
   }
   .filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-bottom: 2rem;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .filter-label {
+    color: var(--color-muted);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-right: 0.25rem;
   }
   .filters a {
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
     color: var(--color-muted);
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    padding: 0.35rem 0.7rem;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--color-border);
     text-decoration: none;
+    transition: color 150ms ease-out, border-color 150ms ease-out;
   }
   .filters a:hover,
-  .filters a:focus-visible {
-    border-color: var(--color-accent);
+  .filters a.active {
     color: var(--color-accent);
-  }
-  .grid {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    border-color: var(--color-accent);
   }
   .empty {
+    color: var(--color-muted);
+    font-size: 0.875rem;
     border: 1px solid var(--color-border);
-    border-radius: 0.5rem;
-    padding: 1.25rem;
+    padding: 1rem;
   }
 </style>

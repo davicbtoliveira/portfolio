@@ -33,9 +33,7 @@ export function buildOgImageModel(input: OgImageInput): OgImageModel {
 
 async function loadFont(): Promise<ArrayBuffer> {
   if (!fontData) {
-    const fontPath = require.resolve(
-      "roboto-fontface/fonts/roboto/Roboto-Regular.woff",
-    );
+    const fontPath = require.resolve("@fontsource/dm-mono/files/dm-mono-latin-400-normal.woff");
     const buffer = await readFile(fontPath);
     fontData = buffer.buffer.slice(
       buffer.byteOffset,
@@ -52,11 +50,11 @@ export async function renderOgPng(input: OgImageInput): Promise<Buffer> {
       type: "div",
       props: {
         style: {
-          background: "#0a0a0a",
-          color: "#ededed",
+          background: "#0c0c0c",
+          color: "#e2ddd0",
           display: "flex",
           flexDirection: "column",
-          fontFamily: "Geist",
+          fontFamily: "DM Mono",
           height: "100%",
           justifyContent: "space-between",
           padding: "72px",
@@ -67,7 +65,7 @@ export async function renderOgPng(input: OgImageInput): Promise<Buffer> {
             type: "div",
             props: {
               style: {
-                color: "#10b981",
+                color: "#f0b34b",
                 fontSize: 32,
                 letterSpacing: 0,
               },
@@ -98,7 +96,7 @@ export async function renderOgPng(input: OgImageInput): Promise<Buffer> {
                   type: "div",
                   props: {
                     style: {
-                      color: "#a1a1aa",
+                      color: "#7d7870",
                       fontSize: 34,
                       lineHeight: 1.3,
                     },
@@ -126,7 +124,7 @@ export async function renderOgPng(input: OgImageInput): Promise<Buffer> {
       height: model.height,
       fonts: [
         {
-          name: "Geist",
+          name: "DM Mono",
           data: await loadFont(),
           weight: 400,
           style: "normal",

@@ -1,26 +1,31 @@
 @import "tailwindcss";
-@import "@fontsource-variable/geist";
-@import "@fontsource-variable/geist-mono";
+@import "@fontsource/dm-mono";
+@import "@fontsource-variable/literata";
 
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-bg: light-dark(#fafafa, #0a0a0a);
-  --color-fg: light-dark(#0a0a0a, #ededed);
-  --color-muted: light-dark(#525252, #a1a1aa);
-  --color-border: light-dark(#e5e5e5, #262626);
-  --color-accent: light-dark(#059669, #10b981);
-  --color-accent-hover: light-dark(#047857, #34d399);
-  --color-accent-soft: light-dark(#d1fae5, #064e3b);
+  --color-bg: light-dark(#f5f0e8, #0c0c0c);
+  --color-fg: light-dark(#1a1816, #e2ddd0);
+  --color-muted: light-dark(#6b655a, #7d7870);
+  --color-border: light-dark(#d4cdc0, #2a2722);
+  --color-accent: light-dark(#a67c00, #f0b34b);
+  --color-accent-hover: light-dark(#7a5b00, #f7c948);
+  --color-accent-subtle: light-dark(#f5f0e8, #1a1710);
+  --color-blue: light-dark(#4a7fa8, #7ab0d4);
 
-  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Geist Mono Variable", ui-monospace, monospace;
+  --font-mono: "DM Mono", ui-monospace, monospace;
+  --font-serif: "Literata Variable", ui-serif, Georgia, serif;
 }
 
 html {
   background-color: var(--color-bg);
   color: var(--color-fg);
-  font-family: var(--font-sans);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: auto;
 }
 
 html[data-theme="dark"] {
@@ -41,25 +46,247 @@ body {
   outline-offset: 3px;
 }
 
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+a {
+  color: var(--color-blue);
+  text-decoration: none;
+  transition: color 150ms ease-out;
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+button {
+  font-family: var(--font-mono);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 2rem 0;
+}
+
+pre,
+code {
+  font-family: var(--font-mono);
+}
+
 .theme-toggle {
   display: inline-grid;
   width: 2rem;
   height: 2rem;
   place-items: center;
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
+  border: none;
   background: transparent;
   color: var(--color-muted);
   cursor: pointer;
-  transition:
-    border-color 200ms ease-out,
-    color 200ms ease-out;
+  font-size: 0.875rem;
+  transition: color 150ms ease-out;
 }
 
 .theme-toggle:hover,
 .theme-toggle:focus-visible {
-  border-color: var(--color-accent);
   color: var(--color-accent);
+}
+
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 2.5rem 0;
+}
+
+.section-heading {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-muted);
+  margin: 0 0 1.25rem;
+}
+
+.page {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+.whoami-response {
+  color: var(--color-accent);
+  margin: 0.5rem 0 1.5rem;
+  line-height: 1.5;
+  animation: fadeIn 0.6s ease-out 1.8s both;
+}
+
+.whoami-response h1 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 0;
+  color: inherit;
+}
+
+.whoami-response p {
+  font-size: 1rem;
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.project-entry + .project-entry {
+  margin-top: 1.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.project-entry h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0 0 0.35rem;
+}
+
+.project-entry h3 a {
+  color: var(--color-fg);
+}
+
+.project-entry h3 a:hover {
+  color: var(--color-accent);
+}
+
+.project-entry .summary {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  margin: 0 0 0.35rem;
+  line-height: 1.5;
+}
+
+.project-entry .meta {
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+.project-entry .stats {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  display: inline;
+}
+
+.project-entry .links {
+  display: inline;
+  margin: 0;
+}
+
+.project-entry .links a {
+  font-size: 0.75rem;
+  margin-left: 0.75rem;
+}
+
+.post-entry {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.5rem;
+  padding: 0.6rem 0;
+}
+
+.post-entry + .post-entry {
+  border-top: 1px solid var(--color-border);
+}
+
+.post-entry .date {
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  width: 6rem;
+  flex-shrink: 0;
+  padding-top: 0.1rem;
+}
+
+.post-entry .info {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-entry .title {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-fg);
+  text-decoration: none;
+}
+
+.post-entry .title:hover {
+  color: var(--color-accent);
+}
+
+.post-entry .description {
+  color: var(--color-muted);
+  font-size: 0.8125rem;
+  margin: 0.15rem 0 0;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.terminal-line {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  color: var(--color-muted);
+}
+
+.terminal-prompt {
+  color: var(--color-accent);
+  margin-right: 0.5rem;
+  user-select: none;
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  background: var(--color-accent);
+  animation: blink 1s step-end 3;
+  margin-left: 0.15rem;
+  vertical-align: text-bottom;
+}
+
+.typewriter-wrapper {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.typewriter-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 0.5s steps(7) 1s forwards;
+  width: 0;
+  vertical-align: bottom;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  background: var(--color-accent);
+  animation: blink 1s step-end infinite;
+  margin-left: 0;
+  vertical-align: text-bottom;
+  opacity: 0;
+  animation: blink 1s step-end 0.5s 3, blink 1s step-end 1.6s infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -69,5 +296,16 @@ body {
     animation-duration: 1ms !important;
     scroll-behavior: auto !important;
     transition-duration: 1ms !important;
+  }
+  .terminal-cursor,
+  .typewriter-cursor {
+    display: none;
+  }
+  .typewriter-text {
+    width: auto;
+  }
+  .whoami-response {
+    animation: none;
+    opacity: 1;
   }
 }

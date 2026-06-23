@@ -12,84 +12,62 @@ const tags = await getPostTags();
   title="Blog — Davi Oliveira"
   description="Technical posts by Davi Oliveira in reverse chronological order."
 >
-  <main class="blog-page">
-    <header class="page-header">
-      <p class="eyebrow">Blog</p>
-      <h1>Blog</h1>
-      <p>Technical notes, project write-ups, and implementation decisions.</p>
-    </header>
+  <div class="page">
+    <h1 class="section-heading">Blog</h1>
+    <p class="page-desc">
+      Technical notes, project write-ups, and implementation decisions.
+    </p>
 
     <nav aria-label="Blog tags" class="filters">
-      <a href="/blog">All</a>
-      {tags.map((item) => <a href={`/blog?tag=${item}`}>{item}</a>)}
+      <a href="/blog" class:list={{ active: !tag }}>all</a>
+      {tags.map((item) => (
+        <a href={`/blog?tag=${item}`} class:list={{ active: tag === item }}>{item}</a>
+      ))}
     </nav>
 
     {
       posts.length > 0 ? (
-        <div class="list">
+        <div>
           {posts.map((entry) => (
             <BlogCard post={entry.data} href={`/blog/${entry.id}`} />
           ))}
         </div>
       ) : (
-        <p class="empty">No posts match this tag.</p>
+        <p class="empty">no posts match this tag</p>
       )
     }
-  </main>
+  </div>
 </BaseLayout>
 
 <style>
-  .blog-page {
-    max-width: 48rem;
-    margin: 0 auto;
-    padding: 4rem 1.5rem;
-  }
-  .page-header {
-    margin-bottom: 2rem;
-  }
-  .eyebrow {
-    color: var(--color-accent);
-    font-family: var(--font-mono);
-    font-size: 0.875rem;
-    margin: 0 0 0.75rem;
-  }
-  h1 {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    line-height: 1.1;
-    margin: 0 0 1rem;
-  }
-  p {
+  .page-desc {
     color: var(--color-muted);
-    line-height: 1.7;
-    margin: 0;
+    font-size: 0.9375rem;
+    margin: -0.75rem 0 1.5rem;
   }
   .filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-bottom: 2rem;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
   }
   .filters a {
-    border: 1px solid var(--color-border);
-    border-radius: 999px;
     color: var(--color-muted);
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    padding: 0.35rem 0.7rem;
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--color-border);
     text-decoration: none;
+    transition: color 150ms ease-out, border-color 150ms ease-out;
   }
   .filters a:hover,
-  .filters a:focus-visible {
-    border-color: var(--color-accent);
+  .filters a.active {
     color: var(--color-accent);
-  }
-  .list {
-    display: grid;
-    gap: 1rem;
+    border-color: var(--color-accent);
   }
   .empty {
+    color: var(--color-muted);
+    font-size: 0.875rem;
     border: 1px solid var(--color-border);
-    border-radius: 0.5rem;
-    padding: 1.25rem;
+    padding: 1rem;
   }
 </style>
