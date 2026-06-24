@@ -3,8 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import BlogCard from "../../components/BlogCard.astro";
 import { getPostEntries, getPostTags } from "../../lib/posts";
 
-const tag = Astro.url.searchParams.get("tag") ?? undefined;
-const posts = await getPostEntries({ tag });
+const posts = await getPostEntries();
 const tags = await getPostTags();
 ---
 
@@ -18,24 +17,19 @@ const tags = await getPostTags();
       Technical notes, project write-ups, and implementation decisions.
     </p>
 
-    <nav aria-label="Blog tags" class="filters">
-      <a href="/blog" class:list={{ active: !tag }}>all</a>
+    <nav aria-label="Blog tags" class="filters" data-filter-nav>
+      <a href="/blog">all</a>
       {tags.map((item) => (
-        <a href={`/blog?tag=${item}`} class:list={{ active: tag === item }}>{item}</a>
+        <a href={`/blog?tag=${item}`}>{item}</a>
       ))}
     </nav>
 
-    {
-      posts.length > 0 ? (
-        <div>
-          {posts.map((entry) => (
-            <BlogCard post={entry.data} href={`/blog/${entry.id}`} />
-          ))}
-        </div>
-      ) : (
-        <p class="empty">no posts match this tag</p>
-      )
-    }
+    <div data-filter-target>
+      {posts.map((entry) => (
+        <BlogCard post={entry.data} href={`/blog/${entry.id}`} />
+      ))}
+    </div>
+    <p class="empty" hidden>no posts match this tag</p>
   </div>
 </BaseLayout>
 

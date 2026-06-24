@@ -3,17 +3,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
 import { getProjectEntries } from "../../lib/projects";
 
-const statusParam = Astro.url.searchParams.get("status") ?? undefined;
-const techParam = Astro.url.searchParams.get("tech") ?? undefined;
-const status =
-  statusParam === "active" ||
-  statusParam === "maintained" ||
-  statusParam === "archived" ||
-  statusParam === "wip"
-    ? statusParam
-    : undefined;
-
-const projects = await getProjectEntries({ status, tech: techParam });
 const allProjects = await getProjectEntries();
 const statuses = Array.from(new Set(allProjects.map((entry) => entry.data.status))).sort();
 const techs = Array.from(
@@ -31,37 +20,32 @@ const techs = Array.from(
       OSS and personal work, listed with status, role, stack, and links.
     </p>
 
-    <nav aria-label="Project filters" class="filters">
+    <nav aria-label="Project filters" class="filters" data-filter-nav>
       <div class="filter-group">
         <span class="filter-label">status</span>
-        <a href="/projects" class:list={{ active: !statusParam && !techParam }}>all</a>
+        <a href="/projects">all</a>
         {statuses.map((item) => (
-          <a href={`/projects?status=${item}`} class:list={{ active: status === item && !techParam }}>{item}</a>
+          <a href={`/projects?status=${item}`}>{item}</a>
         ))}
       </div>
       <div class="filter-group">
         <span class="filter-label">tech</span>
         {techs.map((item) => (
-          <a href={`/projects?tech=${item}`} class:list={{ active: techParam === item && !statusParam }}>{item}</a>
+          <a href={`/projects?tech=${item}`}>{item}</a>
         ))}
       </div>
     </nav>
 
-    {
-      projects.length > 0 ? (
-        <div>
-          {projects.map((entry) => (
-            <ProjectCard
-              project={entry.data}
-              href={`/projects/${entry.id}`}
-              stats={entry.stats}
-            />
-          ))}
-        </div>
-      ) : (
-        <p class="empty">no projects match this filter</p>
-      )
-    }
+    <div data-filter-target>
+      {allProjects.map((entry) => (
+        <ProjectCard
+          project={entry.data}
+          href={`/projects/${entry.id}`}
+          stats={entry.stats}
+        />
+      ))}
+    </div>
+    <p class="empty" hidden>no projects match this filter</p>
   </div>
 </BaseLayout>
 

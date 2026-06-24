@@ -11,7 +11,7 @@ type Props = {
 const { project, href, stats } = Astro.props;
 ---
 
-<article class="project-entry">
+<article class="project-entry" data-status={project.status} data-tech={project.tech.join(",")}>
   <h3><a href={href}>{project.title}</a></h3>
   <p class="summary">{project.summary}</p>
   <p class="meta">
