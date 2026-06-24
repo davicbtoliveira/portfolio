@@ -6,11 +6,11 @@ const STORAGE_KEY = "theme";
 
 function readTheme(): Theme {
   const stored = window.localStorage.getItem(STORAGE_KEY);
-  return stored === "light" ? "light" : "dark";
+  return stored === "dark" ? "dark" : "light";
 }
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = createSignal<Theme>("dark");
+  const [theme, setTheme] = createSignal<Theme>("light");
 
   onMount(() => {
     setTheme(readTheme());
