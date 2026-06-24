@@ -25,7 +25,7 @@ const image = new URL(imagePath, siteUrl).toString();
 const analyticsToken = import.meta.env.PUBLIC_CF_WEB_ANALYTICS_TOKEN;
 ---
 
-<html data-theme="dark" lang="en">
+<html data-theme="light" lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -48,7 +48,7 @@ const analyticsToken = import.meta.env.PUBLIC_CF_WEB_ANALYTICS_TOKEN;
       {
         `(() => {
   const stored = localStorage.getItem("theme");
-  const theme = stored === "light" ? "light" : "dark";
+  const theme = stored === "dark" ? "dark" : "light";
   document.documentElement.dataset.theme = theme;
 })();`
       }
@@ -56,8 +56,81 @@ const analyticsToken = import.meta.env.PUBLIC_CF_WEB_ANALYTICS_TOKEN;
   </head>
   <body>
     <Header />
-    <slot />
+    <main style="flex: 1">
+      <slot />
+    </main>
     <Footer />
+    <script is:inline>
+      (() => {
+        function updateFilter() {
+          const params = new URLSearchParams(location.search);
+
+          const posts = document.querySelectorAll("[data-tags]");
+          if (posts.length > 0) {
+            const activeTag = params.get("tag");
+            const links = document.querySelectorAll("[data-filter-nav] a");
+            let visible = 0;
+
+            posts.forEach((el) => {
+              const tags = (el.dataset.tags || "").split(",").filter(Boolean);
+              const match = !activeTag || tags.includes(activeTag);
+              el.hidden = !match;
+              if (match) visible++;
+            });
+
+            links.forEach((el) => {
+              const href = el.getAttribute("href");
+              const linkTag = href.startsWith("/blog?tag=") ? href.slice("/blog?tag=".length) : null;
+              const isActive = linkTag === null ? !activeTag : linkTag === activeTag;
+              el.classList.toggle("active", isActive);
+            });
+
+            const empty = document.querySelector(".empty");
+            if (empty) empty.hidden = visible > 0;
+          }
+
+          const projectItems = document.querySelectorAll("[data-status]");
+          if (projectItems.length > 0) {
+            const activeStatus = params.get("status");
+            const activeTech = params.get("tech");
+            const links = document.querySelectorAll("[data-filter-nav] a");
+            let visible = 0;
+
+            projectItems.forEach((el) => {
+              const status = el.dataset.status || "";
+              const techs = (el.dataset.tech || "").split(",").filter(Boolean);
+              let match = true;
+              if (activeStatus) match = match && status === activeStatus;
+              if (activeTech) match = match && techs.includes(activeTech);
+              el.hidden = !match;
+              if (match) visible++;
+            });
+
+            links.forEach((el) => {
+              const href = el.getAttribute("href");
+              const isAll = href === "/projects";
+              const linkStatus = href.startsWith("/projects?status=") ? href.slice("/projects?status=".length) : null;
+              const linkTech = href.startsWith("/projects?tech=") ? href.slice("/projects?tech=".length) : null;
+
+              let isActive = false;
+              if (isAll) {
+                isActive = !activeStatus && !activeTech;
+              } else if (linkStatus) {
+                isActive = activeStatus === linkStatus && !activeTech;
+              } else if (linkTech) {
+                isActive = activeTech === linkTech && !activeStatus;
+              }
+              el.classList.toggle("active", isActive);
+            });
+
+            const empty = document.querySelector(".empty");
+            if (empty) empty.hidden = visible > 0;
+          }
+        }
+
+        document.addEventListener("astro:page-load", updateFilter);
+      })();
+    </script>
     {
       analyticsToken && (
         <script

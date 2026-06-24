@@ -37,8 +37,15 @@ html[data-theme="light"] {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   margin: 0;
   background: var(--color-bg);
+}
+
+[hidden] {
+  display: none !important;
 }
 
 :focus-visible {
