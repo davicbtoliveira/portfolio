@@ -55,10 +55,14 @@ describe("home page", () => {
     );
   });
 
-  it("renders two opening messages in the messenger conversation", () => {
+  it("renders an MSN-style transcript with two opening messages", () => {
+    expect(root.querySelector(".messenger-toolbar")?.text).toContain("Perfil");
+    expect(root.querySelector(".messenger-toolbar")?.text).toContain("Arquivos");
+
     const messages = root.querySelectorAll("[data-messages] .message--received");
     expect(messages.length).toBe(2);
     expect(messages[0]?.text).toContain("Olá.");
+    expect(messages[0]?.text).toContain("Davi diz:");
     expect(messages[1]?.text).toContain("Crio software minimalista");
   });
 
