@@ -11,6 +11,8 @@ type Props = {
   imagePath?: string;
   ogType?: "website" | "article";
   showChrome?: boolean;
+  faviconPath?: string;
+  lang?: string;
 };
 
 const siteUrl = "https://dcbto.dev";
@@ -21,13 +23,15 @@ const {
   imagePath = "/og/default.png",
   ogType = "website",
   showChrome = true,
+  faviconPath = "/favicon.ico",
+  lang = "en",
 } = Astro.props;
 const canonical = new URL(canonicalPath, siteUrl).toString();
 const image = new URL(imagePath, siteUrl).toString();
 const analyticsToken = import.meta.env.PUBLIC_CF_WEB_ANALYTICS_TOKEN;
 ---
 
-<html data-theme="light" lang="en">
+<html data-theme="light" lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -44,7 +48,7 @@ const analyticsToken = import.meta.env.PUBLIC_CF_WEB_ANALYTICS_TOKEN;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
     <meta name="cf-web-analytics" content="configure-token-in-production" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href={faviconPath} />
     <ClientRouter />
     <script data-theme-bootstrap is:inline>
       {
