@@ -159,6 +159,7 @@ const description = "Crio software minimalista, com atenção aos detalhes.";
   .window-titlebar {
     height: 2.25rem;
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     gap: 0.55rem;
     padding: 0 0.6rem;
@@ -185,6 +186,7 @@ const description = "Crio software minimalista, com atenção aos detalhes.";
 
   .contact-bar {
     display: flex;
+    flex-shrink: 0;
     align-items: center;
     gap: 0.7rem;
     padding: 0.95rem 1.2rem;
@@ -227,7 +229,7 @@ const description = "Crio software minimalista, com atenção aos detalhes.";
   .link-preview small { color: #7690a9; font-size: 0.68rem; }
   .link-preview__open { padding: 0.65rem 0.7rem 0 0; color: #5786b7; font-size: 1rem; }
 
-  .choice-panel { padding: 0.85rem 1.2rem 1rem; border-top: 1px solid var(--line); background: #f7fcff; }
+  .choice-panel { flex-shrink: 0; padding: 0.85rem 1.2rem 1rem; border-top: 1px solid var(--line); background: #f7fcff; }
   .choice-panel p { margin: 0 0 0.55rem; color: #537596; font-size: 0.76rem; }
   .choices { display: flex; flex-wrap: wrap; gap: 0.5rem; }
   .choices button { border: 1px solid #89b5df; border-radius: 4px; padding: 0.45rem 0.7rem; background: linear-gradient(#fff, #e6f3fe); color: #24578e; cursor: pointer; font: 700 0.8rem "Trebuchet MS", Arial, sans-serif; transition: border-color 140ms ease, background 140ms ease, transform 140ms ease; }
