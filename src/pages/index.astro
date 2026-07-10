@@ -13,11 +13,13 @@ const description = "Crio software minimalista, com atenção aos detalhes.";
   <div class="messenger-page">
     <section class="messenger-window" aria-label={`Conversa com ${name}`} data-msn-chat>
       <header class="window-titlebar">
-        <div class="window-brand" aria-hidden="true">
-          <span class="butterfly butterfly--blue"></span>
-          <span class="butterfly butterfly--green"></span>
-          <span class="butterfly butterfly--orange"></span>
-        </div>
+        <svg class="msn-icon" viewBox="0 0 32 28" aria-hidden="true">
+          <path fill="#58b7e6" d="M15 14C6 13 2 8 4 3c5-2 10 1 12 7Z" />
+          <path fill="#70c84b" d="M16 15c-7 4-12 3-14-1 2-5 8-6 14-3Z" />
+          <path fill="#f5bd3e" d="M17 14c2-8 7-11 11-9 2 5-2 10-9 11Z" />
+          <path fill="#ef7864" d="M17 16c7 0 11 4 10 8-5 2-10-2-11-7Z" />
+          <circle cx="16" cy="15" r="2.5" fill="#fff" />
+        </svg>
         <p>{name} &lt;davicbtoliveira@gmail.com&gt;</p>
         <div class="window-controls" aria-hidden="true"><i></i><i></i><i></i></div>
       </header>
@@ -58,7 +60,10 @@ const description = "Crio software minimalista, com atenção aos detalhes.";
             data-title="GitHub · Davi Oliveira"
             data-copy="Projetos, experimentos e código aberto."
           >
-            <span aria-hidden="true">⌘</span> github
+            <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M12 .7a11.3 11.3 0 0 0-3.57 22.02c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.79-1.33-3.79-1.33-.5-1.3-1.26-1.64-1.26-1.64-1.04-.7.08-.68.08-.68 1.15.08 1.75 1.17 1.75 1.17 1.02 1.75 2.68 1.25 3.33.96.1-.74.4-1.25.72-1.54-2.5-.28-5.13-1.25-5.13-5.57 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.44.11-3 0 0 .95-.3 3.1 1.16A10.8 10.8 0 0 1 12 6.2c.96 0 1.93.13 2.83.38 2.16-1.46 3.1-1.16 3.1-1.16.62 1.56.23 2.72.12 3 .72.8 1.16 1.8 1.16 3.02 0 4.33-2.64 5.28-5.15 5.56.4.35.76 1.03.76 2.08v3.08c0 .3.2.65.78.54A11.3 11.3 0 0 0 12 .7Z" />
+            </svg>
+            github
           </button>
           <button
             type="button"
@@ -69,7 +74,10 @@ const description = "Crio software minimalista, com atenção aos detalhes.";
             data-title="LinkedIn · Davi Oliveira"
             data-copy="Experiência, trajetória e formas de trabalhar junto."
           >
-            <span aria-hidden="true">↗</span> linkedin
+            <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V8.98h3.42v1.57h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.46v6.29ZM5.34 7.42a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14Zm1.78 13.03H3.56V8.98h3.56v11.47Z" />
+            </svg>
+            linkedin
           </button>
         </div>
       </div>
@@ -140,22 +148,26 @@ const description = "Crio software minimalista, com atenção aos detalhes.";
   .messenger-window {
     width: min(100%, 57rem);
     overflow: hidden;
-    border: 1px solid #7294a5;
-    border-radius: 7px 7px 2px 2px;
+    border: 1px solid #5b9dc1;
+    border-radius: 8px 8px 3px 3px;
     background: white;
-    box-shadow: 0 24px 60px rgb(27 65 87 / 28%);
+    box-shadow:
+      0 0 0 1px rgb(230 248 255 / 88%),
+      0 0 0 2px rgb(42 104 151 / 56%),
+      0 24px 60px rgb(27 65 87 / 32%),
+      0 2px 0 rgb(255 255 255 / 82%) inset;
   }
 
   .window-titlebar {
-    height: 1.8rem;
+    height: 1.95rem;
     display: flex;
     flex-shrink: 0;
     align-items: center;
     gap: 0.4rem;
     padding: 0 0.4rem;
-    border-bottom: 1px solid #b1c3ce;
-    background: linear-gradient(#f6fbfe, #cbdbe5);
-    color: #2e3e48;
+    border-bottom: 1px solid #6da8cb;
+    background: linear-gradient(#effaff 0%, #c5e7f8 43%, #8bc6e8 48%, #b1ddf2 100%);
+    color: #26455c;
   }
 
   .window-titlebar p {
@@ -165,14 +177,13 @@ const description = "Crio software minimalista, com atenção aos detalhes.";
     font-weight: bold;
   }
 
-  .window-brand { display: flex; gap: 1px; transform: rotate(-15deg); }
-  .butterfly { width: 5px; height: 9px; border-radius: 8px 2px 8px 2px; display: block; }
-  .butterfly--blue { background: #4ba1cb; }
-  .butterfly--green { height: 7px; margin-top: 2px; background: #74c756; }
-  .butterfly--orange { background: #f4b547; }
+  .msn-icon { width: 1.15rem; height: 1rem; flex: 0 0 auto; filter: drop-shadow(0 1px rgb(255 255 255 / 75%)); }
   .window-controls { display: flex; align-self: stretch; gap: 1px; }
-  .window-controls i { width: 1.65rem; box-sizing: border-box; border: 1px solid #9daeba; background: linear-gradient(#f9fcfd, #c4d5e0); }
-  .window-controls i:last-child { background: linear-gradient(#f8b3ae, #d56f68); border-color: #bd7975; }
+  .window-controls i { display: grid; width: 1.8rem; box-sizing: border-box; place-items: center; border: 1px solid #7daac4; border-top: 0; background: linear-gradient(#e7f7ff, #9ed0eb); color: #315f7c; font-family: Arial, sans-serif; font-size: 0.74rem; font-style: normal; text-shadow: 0 1px white; }
+  .window-controls i::after { content: "—"; margin-top: -0.22rem; }
+  .window-controls i:nth-child(2)::after { content: "□"; margin-top: -0.1rem; font-size: 0.69rem; }
+  .window-controls i:last-child { background: linear-gradient(#edaaa5, #c9504b); border-color: #bd7773; color: white; text-shadow: 0 1px #93433e; }
+  .window-controls i:last-child::after { content: "×"; margin-top: -0.08rem; font-size: 1rem; }
 
   .messenger-toolbar {
     display: flex;
@@ -235,10 +246,10 @@ const description = "Crio software minimalista, com atenção aos detalhes.";
   .choice-panel { flex-shrink: 0; padding: 0.85rem 2rem 1rem 14.8rem; border-top: 1px solid var(--line); background: #f7fcff; }
   .choice-panel p { margin: 0 0 0.55rem; color: #537596; font-size: 0.76rem; }
   .choices { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .choices button { border: 1px solid #89b5df; border-radius: 4px; padding: 0.45rem 0.7rem; background: linear-gradient(#fff, #e6f3fe); color: #24578e; cursor: pointer; font: 700 0.8rem "Trebuchet MS", Arial, sans-serif; transition: border-color 140ms ease, background 140ms ease, transform 140ms ease; }
+  .choices button { display: inline-flex; align-items: center; gap: 0.35rem; border: 1px solid #89b5df; border-radius: 4px; padding: 0.45rem 0.7rem; background: linear-gradient(#fff, #e6f3fe); color: #24578e; cursor: pointer; font: 700 0.8rem "Trebuchet MS", Arial, sans-serif; transition: border-color 140ms ease, background 140ms ease, transform 140ms ease; }
   .choices button:hover { border-color: #477fb9; background: #d7ebfb; transform: translateY(-1px); }
   .choices button:disabled { cursor: default; opacity: 0.52; transform: none; }
-  .choices button span { color: #1f78bd; font-size: 1rem; vertical-align: -1px; }
+  .social-icon { width: 0.95rem; height: 0.95rem; flex: 0 0 auto; color: #1f78bd; }
   .messenger-note { margin: 0.75rem 0 0; color: #396f9e; font: 0.69rem "DM Mono", ui-monospace, monospace; text-align: center; }
 
   @media (max-width: 32rem) {
