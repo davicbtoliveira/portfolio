@@ -69,6 +69,8 @@ describe("home page", () => {
   it("offers GitHub and LinkedIn as messenger choices", () => {
     const choices = root.querySelectorAll("button[data-social-choice]");
     expect(choices.length).toBe(2);
+    expect(root.querySelector(".msn-icon")).not.toBeNull();
+    expect(root.querySelectorAll("button[data-social-choice] .social-icon").length).toBe(2);
     expect(choices[0]?.getAttribute("data-url")).toBe(
       "https://github.com/davicbtoliveira",
     );
