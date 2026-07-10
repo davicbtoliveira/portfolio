@@ -8,88 +8,232 @@ const description = "Crio software minimalista, com atenção aos detalhes.";
 <BaseLayout
   title={`${name} — software minimalista`}
   description={`${name} — ${description}`}
+  faviconPath="/msn-messenger.svg"
+  lang="pt-BR"
   showChrome={false}
 >
   <div class="messenger-page">
-    <section class="messenger-window" aria-label={`Conversa com ${name}`} data-msn-chat>
+    <section class="messenger-window" aria-label={`Conversa com ${name}`} data-i18n-attr="aria-label:windowAriaLabel" data-msn-chat>
       <header class="window-titlebar">
-        <svg class="msn-icon" viewBox="0 0 32 28" aria-hidden="true">
-          <path fill="#58b7e6" d="M15 14C6 13 2 8 4 3c5-2 10 1 12 7Z" />
-          <path fill="#70c84b" d="M16 15c-7 4-12 3-14-1 2-5 8-6 14-3Z" />
-          <path fill="#f5bd3e" d="M17 14c2-8 7-11 11-9 2 5-2 10-9 11Z" />
-          <path fill="#ef7864" d="M17 16c7 0 11 4 10 8-5 2-10-2-11-7Z" />
-          <circle cx="16" cy="15" r="2.5" fill="#fff" />
-        </svg>
-        <p>{name} &lt;davicbtoliveira@gmail.com&gt;</p>
+        <img class="msn-icon" src="/msn-messenger.svg" alt="" aria-hidden="true" data-messenger-icon />
+        <p>{name} — Conversa</p>
         <div class="window-controls" aria-hidden="true"><i></i><i></i><i></i></div>
       </header>
 
-      <div class="messenger-toolbar" aria-hidden="true">
-        <span>Perfil</span><span>Arquivos</span><span>Contato</span>
-      </div>
-
-      <div class="contact-bar">
-        <div class="avatar" aria-hidden="true">DO</div>
-        <div>
-          <h1>{name} <span>(Disponível)</span></h1>
-          <p>{description}</p>
+      <div class="messenger-surface">
+        <div class="messenger-toolbar" aria-hidden="true">
+          <span data-i18n="toolbarFotos">Fotos</span><span data-i18n="toolbarArquivos">Arquivos</span><span data-i18n="toolbarVideo">Vídeo</span><span data-i18n="toolbarLigar">Ligar</span><span data-i18n="toolbarJogos">Jogos</span><span data-i18n="toolbarAtividades">Atividades</span><span>»</span>
         </div>
-      </div>
 
-      <div class="conversation" data-messages aria-live="polite">
-        <p class="conversation-note">Use os links abaixo para me encontrar.</p>
-        <article class="message message--received">
-          <p class="message-meta">Davi diz:</p>
-          <p class="message-line">• Olá.</p>
-        </article>
-        <article class="message message--received">
-          <p class="message-meta">Davi diz:</p>
-          <p class="message-line">• Eu sou {name}. {description}</p>
-        </article>
-      </div>
-
-      <div class="choice-panel">
-        <p>Escolha onde continuar:</p>
-        <div class="choices" aria-label="Links de Davi">
-          <button
-            type="button"
-            data-social-choice
-            data-label="github"
-            data-url="https://github.com/davicbtoliveira"
-            data-domain="github.com/davicbtoliveira"
-            data-title="GitHub · Davi Oliveira"
-            data-copy="Projetos, experimentos e código aberto."
-          >
-            <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M12 .7a11.3 11.3 0 0 0-3.57 22.02c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.79-1.33-3.79-1.33-.5-1.3-1.26-1.64-1.26-1.64-1.04-.7.08-.68.08-.68 1.15.08 1.75 1.17 1.75 1.17 1.02 1.75 2.68 1.25 3.33.96.1-.74.4-1.25.72-1.54-2.5-.28-5.13-1.25-5.13-5.57 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.44.11-3 0 0 .95-.3 3.1 1.16A10.8 10.8 0 0 1 12 6.2c.96 0 1.93.13 2.83.38 2.16-1.46 3.1-1.16 3.1-1.16.62 1.56.23 2.72.12 3 .72.8 1.16 1.8 1.16 3.02 0 4.33-2.64 5.28-5.15 5.56.4.35.76 1.03.76 2.08v3.08c0 .3.2.65.78.54A11.3 11.3 0 0 0 12 .7Z" />
-            </svg>
-            github
-          </button>
-          <button
-            type="button"
-            data-social-choice
-            data-label="linkedin"
-            data-url="https://linkedin.com/in/dcbto"
-            data-domain="linkedin.com/in/dcbto"
-            data-title="LinkedIn · Davi Oliveira"
-            data-copy="Experiência, trajetória e formas de trabalhar junto."
-          >
-            <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V8.98h3.42v1.57h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.46v6.29ZM5.34 7.42a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14Zm1.78 13.03H3.56V8.98h3.56v11.47Z" />
-            </svg>
-            linkedin
-          </button>
+        <div class="contact-bar">
+          <div class="avatar avatar--contact" aria-hidden="true">DO</div>
+          <div>
+            <h1>{name} <span data-i18n="statusAvail">(Disponível)</span></h1>
+            <p data-i18n="description">{description}</p>
+          </div>
         </div>
+
+        <div class="chat-workspace">
+          <aside class="profile-rail" aria-hidden="true">
+            <span class="rail-handle">‹</span>
+            <div class="avatar avatar--self"><span></span></div>
+          </aside>
+
+          <div class="chat-column">
+            <div class="conversation" data-messages aria-live="polite">
+              <p class="conversation-note">Use os links abaixo para me encontrar.</p>
+              <article class="message message--received">
+                <p class="message-meta" data-i18n="daviSays">Davi diz:</p>
+                <p class="message-line" data-i18n="hello">Olá.</p>
+              </article>
+              <article class="message message--received">
+                <p class="message-meta" data-i18n="daviSays">Davi diz:</p>
+                <p class="message-line" data-i18n="intro">Eu sou {name}. {description}</p>
+              </article>
+            </div>
+
+            <div class="choice-panel">
+              <div class="composer-field">
+                <p data-i18n="choose">Escolha onde continuar:</p>
+                <div class="choices" aria-label="Links de Davi">
+                  <button
+                    type="button"
+                    data-social-choice
+                    data-social="github"
+                    data-label="github"
+                    data-url="https://github.com/davicbtoliveira"
+                    data-domain="github.com/davicbtoliveira"
+                    data-title="GitHub · Davi Oliveira"
+                    data-copy="Projetos, experimentos e código aberto."
+                  >
+                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+                      <path fill="currentColor" d="M12 .7a11.3 11.3 0 0 0-3.57 22.02c.56.1.77-.24.77-.54v-2.1c-3.13.68-3.79-1.33-3.79-1.33-.5-1.3-1.26-1.64-1.26-1.64-1.04-.7.08-.68.08-.68 1.15.08 1.75 1.17 1.75 1.17 1.02 1.75 2.68 1.25 3.33.96.1-.74.4-1.25.72-1.54-2.5-.28-5.13-1.25-5.13-5.57 0-1.23.44-2.23 1.16-3.02-.12-.28-.5-1.44.11-3 0 0 .95-.3 3.1 1.16A10.8 10.8 0 0 1 12 6.2c.96 0 1.93.13 2.83.38 2.16-1.46 3.1-1.16 3.1-1.16.62 1.56.23 2.72.12 3 .72.8 1.16 1.8 1.16 3.02 0 4.33-2.64 5.28-5.15 5.56.4.35.76 1.03.76 2.08v3.08c0 .3.2.65.78.54A11.3 11.3 0 0 0 12 .7Z" />
+                    </svg>
+                    <span data-i18n="labelGithub">github</span>
+                  </button>
+                  <button
+                    type="button"
+                    data-social-choice
+                    data-social="linkedin"
+                    data-label="linkedin"
+                    data-url="https://linkedin.com/in/dcbto"
+                    data-domain="linkedin.com/in/dcbto"
+                    data-title="LinkedIn · Davi Oliveira"
+                    data-copy="Experiência, trajetória e formas de trabalhar junto."
+                  >
+                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+                      <path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V8.98h3.42v1.57h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.26 2.37 4.26 5.46v6.29ZM5.34 7.42a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14Zm1.78 13.03H3.56V8.98h3.56v11.47Z" />
+                    </svg>
+                    <span data-i18n="labelLinkedin">linkedin</span>
+                  </button>
+                  <button
+                    type="button"
+                    data-social-choice
+                    data-social="contato"
+                    data-label="contato"
+                    data-url="mailto:davicbtoliveira@gmail.com"
+                    data-domain="davicbtoliveira@gmail.com"
+                    data-title="davicbtoliveira@gmail.com"
+                    data-copy="Envie uma mensagem por e-mail."
+                  >
+                    <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+                      <path fill="currentColor" d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm9 7.2L20.1 7H3.9L12 12.2Zm0 2.4L3 8.8V17h18V8.8l-9 5.8Z" />
+                    </svg>
+                    <span data-i18n="labelContato">contato</span>
+                  </button>
+                </div>
+              </div>
+              <div class="composer-toolbar" aria-hidden="true">
+                <span>☺</span><span class="composer-font">A</span><span>▧</span><span>♫</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="messenger-statusbar">
+          <span>Windows Live Messenger</span>
+          <span data-i18n="statusbar">© Davi Oliveira. Nenhum direito reservado.</span>
+        </footer>
       </div>
     </section>
-    <p class="messenger-note">feito com cuidado, sem buzzwords</p>
+
+    <div class="win7-taskbar" aria-hidden="true">
+      <span class="start-orb"><i></i></span>
+      <span class="taskbar-app">
+        <img class="taskbar-app__icon" src="/msn-messenger.svg" alt="" />
+        <span>{name}</span>
+      </span>
+      <button type="button" class="taskbar-tray" data-lang-toggle aria-label="Alternar idioma">PT</button>
+    </div>
   </div>
 </BaseLayout>
 
 <script is:inline>
-  const chat = document.querySelector("[data-msn-chat]");
+  const name = "Davi Oliveira";
+  const descriptionPt = "Crio software minimalista, com atenção aos detalhes.";
+  const descriptionEn = "I build minimalist software, with attention to detail.";
 
-  if (chat) {
+  const i18n = {
+    pt: {
+      htmlLang: "pt-BR",
+      title: name + " — software minimalista",
+      windowAriaLabel: "Conversa com " + name,
+      statusAvail: "(Disponível)",
+      description: descriptionPt,
+      contactUpdate: "3 formas de contato disponíveis",
+      daviSays: "Davi diz:",
+      youSays: "Você diz:",
+      hello: "Olá.",
+      intro: "Eu sou " + name + ". " + descriptionPt,
+      choose: "Escolha onde continuar:",
+      labelGithub: "github",
+      labelLinkedin: "linkedin",
+      labelContato: "contato",
+      statusbar: "© Davi Oliveira. Nenhum direito reservado.",
+      hereIs: "Aqui está:",
+      toolbarFotos: "Fotos",
+      toolbarArquivos: "Arquivos",
+      toolbarVideo: "Vídeo",
+      toolbarLigar: "Ligar",
+      toolbarJogos: "Jogos",
+      toolbarAtividades: "Atividades",
+      social: {
+        github: { copy: "Projetos, experimentos e código aberto.", title: "GitHub · Davi Oliveira" },
+        linkedin: { copy: "Experiência, trajetória e formas de trabalhar junto.", title: "LinkedIn · Davi Oliveira" },
+        contato: { copy: "Envie uma mensagem por e-mail.", title: "davicbtoliveira@gmail.com" },
+      },
+    },
+    en: {
+      htmlLang: "en",
+      title: name + " — minimalist software",
+      windowAriaLabel: "Chat with " + name,
+      statusAvail: "(Available)",
+      description: descriptionEn,
+      contactUpdate: "3 ways to get in touch",
+      daviSays: "Davi says:",
+      youSays: "You say:",
+      hello: "Hello.",
+      intro: "I'm " + name + ". " + descriptionEn,
+      choose: "Choose where to continue:",
+      labelGithub: "github",
+      labelLinkedin: "linkedin",
+      labelContato: "contact",
+      statusbar: "© Davi Oliveira. No rights reserved.",
+      hereIs: "Here it is:",
+      toolbarFotos: "Photos",
+      toolbarArquivos: "Files",
+      toolbarVideo: "Video",
+      toolbarLigar: "Call",
+      toolbarJogos: "Games",
+      toolbarAtividades: "Activities",
+      social: {
+        github: { copy: "Projects, experiments and open source.", title: "GitHub · Davi Oliveira" },
+        linkedin: { copy: "Experience, background and ways to work together.", title: "LinkedIn · Davi Oliveira" },
+        contato: { copy: "Send me an email.", title: "davicbtoliveira@gmail.com" },
+      },
+    },
+  };
+
+  let currentLang = "pt";
+
+  function applyLang(lang) {
+    const dict = i18n[lang] || i18n.pt;
+    currentLang = lang;
+    document.documentElement.lang = dict.htmlLang;
+    document.documentElement.dataset.lang = lang;
+    document.title = dict.title;
+
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const key = el.dataset.i18n;
+      if (Object.prototype.hasOwnProperty.call(dict, key)) el.textContent = dict[key];
+    });
+
+    document.querySelectorAll("[data-i18n-attr]").forEach((el) => {
+      el.dataset.i18nAttr.split(",").forEach((spec) => {
+        const [attr, key] = spec.split(":");
+        if (Object.prototype.hasOwnProperty.call(dict, key)) el.setAttribute(attr, dict[key]);
+      });
+    });
+
+    document.querySelectorAll("[data-social]").forEach((el) => {
+      const s = dict.social[el.dataset.social];
+      if (s) {
+        el.dataset.copy = s.copy;
+        el.dataset.title = s.title;
+      }
+    });
+
+    const toggle = document.querySelector("[data-lang-toggle]");
+    if (toggle) toggle.textContent = lang === "pt" ? "PT" : "EN";
+  }
+
+  function initLang() {
+    applyLang(localStorage.getItem("lang") === "en" ? "en" : "pt");
+  }
+
+  function initChat() {
+    const chat = document.querySelector("[data-msn-chat]");
+    if (!chat) return;
     const messages = chat.querySelector("[data-messages]");
     const choices = chat.querySelectorAll("[data-social-choice]");
 
@@ -97,33 +241,40 @@ const description = "Crio software minimalista, com atenção aos detalhes.";
       choice.addEventListener("click", () => {
         const { label, url, domain, title, copy } = choice.dataset;
         if (!label || !url || !domain || !title || !copy || !messages) return;
+        const t = i18n[currentLang] || i18n.pt;
 
         const sent = document.createElement("article");
         sent.className = "message message--sent";
-        sent.innerHTML = `<p class="message-meta">Você diz:</p><p class="message-line">• ${label}</p>`;
+        sent.innerHTML = `<p class="message-meta">${t.youSays}</p><p class="message-line">${label}</p>`;
 
         const received = document.createElement("article");
         received.className = "message message--received message--link";
         received.innerHTML = `
-          <p class="message-meta">Davi diz:</p>
-          <p class="message-line">• Aqui está:</p>
-          <a class="link-preview" href="${url}" target="_blank" rel="noreferrer">
-            <span class="link-preview__accent"></span>
-            <span class="link-preview__content">
-              <strong>${title}</strong>
-              <span>${copy}</span>
-              <small>${domain}</small>
-            </span>
-            <span class="link-preview__open" aria-hidden="true">↗</span>
-          </a>`;
+          <p class="message-meta">${t.daviSays}</p>
+          <p class="message-line">${t.hereIs} <a class="message-link" href="${url}" target="_blank" rel="noreferrer">${title}</a></p>
+          <p class="message-detail">${copy} — ${domain}</p>`;
 
         messages.append(sent, received);
-        choice.setAttribute("aria-pressed", "true");
         choice.disabled = true;
-        received.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        received.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" });
       });
     });
   }
+
+  function initToggle() {
+    const toggle = document.querySelector("[data-lang-toggle]");
+    if (!toggle) return;
+    toggle.addEventListener("click", () => {
+      const next = currentLang === "pt" ? "en" : "pt";
+      localStorage.setItem("lang", next);
+      applyLang(next);
+    });
+  }
+
+  initLang();
+  initChat();
+  initToggle();
 </script>
 
 <style>
@@ -132,144 +283,289 @@ const description = "Crio software minimalista, com atenção aos detalhes.";
   }
 
   .messenger-page {
-    --ink: #3e4b54;
-    --blue: #199dd5;
-    --line: #b9dbe9;
+    --ink: #243b4a;
+    --line: #a9cedc;
+    position: relative;
+    isolation: isolate;
     min-height: 100vh;
     box-sizing: border-box;
     display: grid;
     place-items: center;
-    padding: 2rem 1rem;
-    background: linear-gradient(135deg, #d5edf8, #91c0db);
+    overflow: hidden;
+    padding: 3rem 1rem 4.5rem;
+    background:
+      radial-gradient(ellipse at 56% 48%, rgb(232 251 255 / 68%) 0 8%, transparent 40%),
+      radial-gradient(ellipse at 47% 110%, #7dbbdf 0 15%, transparent 46%),
+      linear-gradient(145deg, #174e87 0%, #2f8ac3 38%, #9ad9ef 70%, #2e74a6 100%);
     color: var(--ink);
-    font-family: Tahoma, "Trebuchet MS", Arial, sans-serif;
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  }
+
+  .messenger-page::before {
+    position: absolute;
+    z-index: -1;
+    inset: -15%;
+    background:
+      linear-gradient(27deg, transparent 43%, rgb(255 255 255 / 10%) 43.5%, transparent 48%),
+      linear-gradient(151deg, transparent 46%, rgb(199 241 255 / 16%) 46.5%, transparent 51%);
+    content: "";
+    transform: rotate(-3deg);
   }
 
   .messenger-window {
-    width: min(100%, 57rem);
+    z-index: 1;
+    width: min(100%, 44rem);
+    height: min(41rem, calc(100vh - 7.5rem));
+    min-height: 34rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
-    border: 1px solid #4b89b5;
-    border-radius: 8px 8px 4px 4px;
-    background: white;
+    padding: 0 0.38rem 0.38rem;
+    border: 1px solid #285f7f;
+    border-radius: 8px 8px 5px 5px;
+    background:
+      linear-gradient(90deg, rgb(227 248 255 / 84%), rgb(92 185 222 / 72%) 45%, rgb(204 242 253 / 84%)),
+      #72beda;
     box-shadow:
-      0 0 0 1px rgb(235 251 255 / 92%),
-      0 0 0 2px rgb(42 104 151 / 68%),
-      0 24px 60px rgb(27 65 87 / 32%),
-      0 2px 0 rgb(255 255 255 / 90%) inset,
-      0 0 16px rgb(140 210 246 / 35%);
+      0 0 0 1px rgb(239 252 255 / 82%) inset,
+      0 0 0 2px rgb(30 79 108 / 36%),
+      0 22px 55px rgb(5 28 51 / 55%),
+      0 0 22px rgb(139 222 255 / 32%);
+    backdrop-filter: blur(10px) saturate(1.2);
   }
 
   .window-titlebar {
-    height: 1.95rem;
+    height: 1.9rem;
     display: flex;
     flex-shrink: 0;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0 0.4rem;
-    border-bottom: 1px solid #6da8cb;
-    background: linear-gradient(#effaff 0%, #c5e7f8 43%, #8bc6e8 48%, #b1ddf2 100%);
-    color: #26455c;
+    gap: 0.35rem;
+    padding-left: 0.08rem;
+    color: #152d3a;
   }
 
   .window-titlebar p {
     flex: 1;
     margin: 0;
-    font-size: 0.74rem;
-    font-weight: bold;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-shadow: 0 1px white, 0 0 5px white;
   }
 
-  .msn-icon { width: 1.15rem; height: 1rem; flex: 0 0 auto; filter: drop-shadow(0 1px rgb(255 255 255 / 75%)); }
-  .window-controls { display: flex; align-self: stretch; margin-right: -0.4rem; overflow: hidden; border-radius: 0 0 6px 6px; }
-  .window-controls i { position: relative; display: grid; width: 2rem; box-sizing: border-box; place-items: center; border: 0; border-bottom: 1px solid #4e91bc; border-left: 1px solid rgb(81 143 181 / 58%); background: linear-gradient(#dff4ff 0%, #afdcef 48%, #77b9dd 100%); color: #315f7c; font-family: Arial, sans-serif; font-size: 0.74rem; font-style: normal; text-shadow: 0 1px white; box-shadow: 0 1px 0 rgb(255 255 255 / 84%) inset, -1px 0 rgb(255 255 255 / 46%) inset; }
-  .window-controls i::before { position: absolute; inset: 1px 1px 48%; border-radius: 0 0 3px 3px; background: rgb(255 255 255 / 43%); content: ""; }
-  .window-controls i::after { position: relative; content: "—"; margin-top: -0.22rem; }
+  .msn-icon { width: 1.1rem; height: 1rem; flex: 0 0 auto; filter: drop-shadow(0 1px 0 white); }
+  .window-controls { height: 1.34rem; display: flex; align-self: flex-start; margin-right: -0.38rem; overflow: hidden; border-radius: 0 0 5px 5px; }
+  .window-controls i { position: relative; display: grid; width: 1.85rem; box-sizing: border-box; place-items: center; border: 0; border-bottom: 1px solid #4e839d; border-left: 1px solid rgb(52 104 132 / 55%); background: linear-gradient(#eefaff 0%, #b8ddec 46%, #78b6d0 100%); color: #173c50; font-family: "Segoe UI Symbol", "Segoe UI", sans-serif; font-size: 0.68rem; font-style: normal; text-shadow: 0 1px white; box-shadow: 0 1px 0 rgb(255 255 255 / 90%) inset, -1px 0 rgb(255 255 255 / 42%) inset; }
+  .window-controls i::before { position: absolute; inset: 1px 1px 48%; border-radius: 0 0 3px 3px; background: rgb(255 255 255 / 45%); content: ""; }
+  .window-controls i::after { position: relative; content: "—"; margin-top: -0.18rem; }
   .window-controls i:first-child { border-radius: 0 0 0 5px; }
-  .window-controls i:nth-child(2)::after { content: "□"; margin-top: -0.1rem; font-size: 0.69rem; }
-  .window-controls i:last-child { width: 2.2rem; border-color: #a64845; border-radius: 0 0 5px 0; background: linear-gradient(#f3b6b1 0%, #e87e76 43%, #c84c49 100%); color: white; text-shadow: 0 1px #93433e; box-shadow: 0 1px 0 rgb(255 239 236 / 78%) inset; }
+  .window-controls i:nth-child(2)::after { content: "□"; margin-top: -0.04rem; font-size: 0.66rem; }
+  .window-controls i:last-child { width: 2.85rem; border-color: #8f3732; border-radius: 0 0 5px; background: linear-gradient(#f7c2bd 0%, #df746c 45%, #b43d38 100%); color: white; text-shadow: 0 1px #722d29; box-shadow: 0 1px 0 rgb(255 239 236 / 84%) inset; }
   .window-controls i:last-child::before { background: rgb(255 244 241 / 35%); }
-  .window-controls i:last-child::after { content: "×"; margin-top: -0.08rem; font-size: 1rem; }
+  .window-controls i:last-child::after { content: "×"; margin-top: -0.04rem; font-size: 0.92rem; }
+
+  .messenger-surface {
+    min-height: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid #416f85;
+    background: white;
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 68%) inset;
+  }
 
   .messenger-toolbar {
+    min-height: 2rem;
+    box-sizing: border-box;
     display: flex;
-    gap: 2rem;
-    padding: 0.45rem 1rem;
-    border-bottom: 1px solid #238fc3;
-    background: linear-gradient(#48bce9, #1197d1);
+    align-items: center;
+    gap: 1rem;
+    overflow: hidden;
+    padding: 0 0.75rem;
+    border-bottom: 1px solid #158eb8;
+    background: linear-gradient(#6fd2ed 0%, #37b9e0 46%, #199bc9 100%);
     color: white;
-    font-size: 0.78rem;
-    text-shadow: 0 1px #197ca8;
+    font-size: 0.72rem;
+    white-space: nowrap;
+    text-shadow: 0 1px #137598;
+    box-shadow: 0 1px rgb(255 255 255 / 55%) inset;
   }
 
   .contact-bar {
-    display: flex;
+    min-height: 6.8rem;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 7.1rem minmax(0, 1fr);
     flex-shrink: 0;
     align-items: center;
-    gap: 1.1rem;
-    min-height: 7.5rem;
-    padding: 1.25rem 2rem;
-    border-bottom: 1px solid #d0e1e9;
-    background: linear-gradient(155deg, #f5fcff 5%, #d9f0fa 53%, #a1d7ee 54%, #e3f5fb 100%);
+    padding: 0.55rem 1rem 0.55rem 0.7rem;
+    border-bottom: 1px solid #bbdce8;
+    background:
+      linear-gradient(163deg, transparent 0 45%, rgb(255 255 255 / 47%) 45.5% 48%, transparent 49%),
+      radial-gradient(ellipse at 62% 15%, #eafaff 0%, #bce9f5 38%, #7fd1e8 100%);
   }
 
   .avatar {
     display: grid;
     place-items: center;
-    width: 6.25rem;
-    height: 6.25rem;
     box-sizing: border-box;
-    border: 4px solid #73cf42;
-    border-radius: 18px;
     color: #eef8ff;
-    font-weight: bold;
-    font-size: 1.1rem;
-    background: linear-gradient(135deg, #a7d3e3, #527e95);
-    box-shadow: 0 0 0 2px white, 0 5px 10px rgb(36 101 74 / 25%);
+    font-weight: 600;
+    background: linear-gradient(145deg, #b8deea 0%, #638da3 55%, #31566a 100%);
   }
 
-  .contact-bar h1 { margin: 0; color: #42505a; font-size: 1.45rem; font-weight: normal; line-height: 1.2; }
-  .contact-bar h1 span { font-size: 0.85rem; }
-  .contact-bar p { margin: 0.3rem 0 0; color: #44535e; font-size: 0.9rem; }
+  .avatar--contact {
+    width: 5.65rem;
+    height: 5.65rem;
+    border: 3px solid #79d329;
+    border-radius: 7px;
+    font-size: 1.05rem;
+    box-shadow: 0 0 0 1px #3d6e80, 0 0 0 3px white, 0 4px 9px rgb(31 105 84 / 30%);
+  }
 
-  .conversation { min-height: 16rem; max-height: 25rem; overflow-y: auto; padding: 1.1rem 2rem 1.5rem 14.8rem; background: white; }
-  .conversation-note { margin: 0 0 1.35rem; padding-bottom: 0.55rem; border-bottom: 1px solid #c6d6dd; color: #63737e; font-size: 0.79rem; }
-  .message { margin-top: 0.6rem; }
-  .message:first-of-type { margin-top: 0; }
-  .message-meta { margin: 0; color: #6a747b; font-size: 0.88rem; }
-  .message-line { margin: 0.12rem 0 0; padding-left: 0.38rem; color: #3f4b53; font-size: 0.95rem; line-height: 1.45; }
-  .message--sent .message-meta { color: #42728d; }
+  .contact-bar h1 { margin: 0; color: #294251; font-size: 1.08rem; font-weight: 400; line-height: 1.2; text-shadow: 0 1px white; }
+  .contact-bar h1 span { font-size: 0.72rem; }
+  .contact-bar p { margin: 0.22rem 0 0; color: #425c69; font-size: 0.76rem; }
 
-  .link-preview { width: min(100%, 28rem); box-sizing: border-box; display: flex; gap: 0.75rem; overflow: hidden; margin: 0.45rem 0 0 0.35rem; border: 1px solid #c5d7e8; border-radius: 2px; background: #f9fcff; color: #254b7f; text-decoration: none; box-shadow: 0 2px 5px rgb(30 73 118 / 10%); transition: transform 140ms ease, box-shadow 140ms ease; }
-  .link-preview:hover { color: #254b7f; transform: translateY(-1px); box-shadow: 0 5px 10px rgb(30 73 118 / 16%); }
-  .link-preview__accent { width: 4px; flex: 0 0 auto; background: #39a3d6; }
-  .link-preview__content { min-width: 0; display: grid; gap: 0.18rem; padding: 0.7rem 0; }
-  .link-preview strong { font-size: 0.83rem; }
-  .link-preview span { color: #57728f; font-size: 0.75rem; line-height: 1.35; }
-  .link-preview small { color: #7690a9; font-size: 0.68rem; }
-  .link-preview__open { padding: 0.65rem 0.7rem 0 0; color: #5786b7; font-size: 1rem; }
+  .chat-workspace {
+    min-height: 0;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 7.1rem minmax(0, 1fr);
+    background: #f8fcfe;
+  }
 
-  .choice-panel { flex-shrink: 0; padding: 0.85rem 2rem 1rem 14.8rem; border-top: 1px solid var(--line); background: #f7fcff; }
-  .choice-panel p { margin: 0 0 0.55rem; color: #537596; font-size: 0.76rem; }
+  .profile-rail {
+    position: relative;
+    border-right: 1px solid #bddce7;
+    background: linear-gradient(90deg, #eaf7fb, #f8fdff 82%, #d9edf4);
+  }
+
+  .rail-handle {
+    position: absolute;
+    top: 0.45rem;
+    left: 0.36rem;
+    width: 0.84rem;
+    height: 0.84rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid #78a3b4;
+    border-radius: 50%;
+    background: linear-gradient(white, #cae5ef);
+    color: #3e7489;
+    font: 700 0.72rem/1 Arial, sans-serif;
+  }
+
+  .avatar--self {
+    position: absolute;
+    right: 0.72rem;
+    bottom: 0.95rem;
+    width: 5rem;
+    height: 5rem;
+    border: 2px solid #81cc46;
+    border-radius: 6px;
+    background: linear-gradient(#f7fcfd, #b8d0d8);
+    box-shadow: 0 0 0 1px #5d8290, 0 0 0 3px white, 0 3px 8px rgb(31 76 91 / 22%);
+  }
+
+  .avatar--self span::before,
+  .avatar--self span::after {
+    position: absolute;
+    left: 50%;
+    background: linear-gradient(#f2f5f6, #9babb1);
+    box-shadow: 0 0 0 1px #87999f;
+    content: "";
+    transform: translateX(-50%);
+  }
+
+  .avatar--self span::before { top: 0.78rem; width: 1.42rem; height: 1.42rem; border-radius: 50%; }
+  .avatar--self span::after { bottom: 0.68rem; width: 2.9rem; height: 1.8rem; border-radius: 50% 50% 30% 30%; }
+
+  .chat-column {
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    background: white;
+  }
+
+  .conversation { min-height: 8rem; flex: 1; overflow-y: auto; padding: 0.8rem 0.9rem 1rem; background: linear-gradient(#fff, #fff 78%, #f8fcfe); font-family: Tahoma, "Segoe UI", Arial, sans-serif; }
+  .conversation-note { margin: 0 0 0.95rem; padding-bottom: 0.45rem; border-bottom: 1px solid #cadde4; color: #6b7d85; font-size: 0.7rem; }
+  .conversation :global(.message) { margin-top: 0.55rem; }
+  .conversation :global(.message:first-of-type) { margin-top: 0; }
+  .conversation :global(.message-meta) { margin: 0; color: #65747b; font-size: 0.74rem; }
+  .conversation :global(.message-line) { margin: 0.1rem 0 0; color: #263b46; font-size: 0.78rem; line-height: 1.4; }
+  .conversation :global(.message--sent) :global(.message-meta) { color: #397491; }
+  .conversation :global(.message-detail) { margin: 0.1rem 0 0; color: #73828a; font-size: 0.68rem; }
+  .conversation :global(.message-link) { color: #0066cc; text-decoration: underline; }
+  .conversation :global(.message-link:hover) { color: #003f8f; }
+
+  .choice-panel { flex: 0 0 auto; padding: 0.35rem 0.5rem 0.42rem; border-top: 1px solid var(--line); background: #eef8fb; }
+  .composer-field { min-height: 5rem; box-sizing: border-box; padding: 0.5rem 0.55rem; border: 1px solid #9fc4d2; border-radius: 2px; background: white; box-shadow: 0 1px 3px rgb(45 96 116 / 12%) inset; }
+  .choice-panel p { margin: 0 0 0.45rem; color: #577482; font-size: 0.7rem; }
   .choices { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .choices button { display: inline-flex; align-items: center; gap: 0.35rem; border: 1px solid #89b5df; border-radius: 4px; padding: 0.45rem 0.7rem; background: linear-gradient(#fff, #e6f3fe); color: #24578e; cursor: pointer; font: 700 0.8rem "Trebuchet MS", Arial, sans-serif; transition: border-color 140ms ease, background 140ms ease, transform 140ms ease; }
-  .choices button:hover { border-color: #477fb9; background: #d7ebfb; transform: translateY(-1px); }
-  .choices button:disabled { cursor: default; opacity: 0.52; transform: none; }
-  .social-icon { width: 0.95rem; height: 0.95rem; flex: 0 0 auto; color: #1f78bd; }
-  .messenger-note { margin: 0.75rem 0 0; color: #396f9e; font: 0.69rem "DM Mono", ui-monospace, monospace; text-align: center; }
+  .choices button { display: inline-flex; align-items: center; gap: 0.32rem; padding: 0.32rem 0.6rem; border: 1px solid #759fbd; border-radius: 3px; background: linear-gradient(#fff 0%, #edf7fc 48%, #cfe8f3 100%); color: #235a84; cursor: pointer; font: 600 0.72rem "Segoe UI", Tahoma, sans-serif; box-shadow: 0 1px 0 white inset; transition: border-color 120ms ease, background 120ms ease; }
+  .choices button:hover { border-color: #367ca8; background: linear-gradient(#fff, #cbeaf8); }
+  .choices button:focus-visible { outline-color: #1c719c; }
+  .choices button:disabled { cursor: default; opacity: 0.5; }
+  .social-icon { width: 0.85rem; height: 0.85rem; flex: 0 0 auto; color: #1d7fc2; }
 
-  @media (max-width: 32rem) {
-    .messenger-page { padding: 0; place-items: start stretch; }
-    .messenger-window { width: 100%; min-height: 100vh; display: flex; flex-direction: column; border: 0; border-radius: 0; }
-    .messenger-toolbar { gap: 1.2rem; }
-    .contact-bar { min-height: 5rem; padding: 0.85rem 1rem; }
-    .avatar { width: 4.3rem; height: 4.3rem; border-radius: 12px; font-size: 0.8rem; }
-    .contact-bar h1 { font-size: 1.1rem; }
-    .contact-bar p { font-size: 0.78rem; }
-    .conversation { min-height: 0; max-height: none; flex: 1; padding: 1rem; }
-    .choice-panel { padding: 0.85rem 1rem 1rem; }
-    .messenger-note { display: none; }
+  .composer-toolbar { height: 1.7rem; display: flex; align-items: center; gap: 0.72rem; padding: 0 0.25rem; color: #357b9c; font-size: 0.88rem; }
+  .composer-font { color: #1666a5; font: 700 0.78rem Georgia, serif; text-decoration: underline; }
+  .messenger-statusbar { min-height: 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0 0.65rem; border-top: 1px solid #b7d6e1; background: linear-gradient(#f3fbfd, #d7eef4); color: #567584; font-size: 0.64rem; }
+
+  .win7-taskbar {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2.8rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0 0.75rem;
+    border-top: 1px solid rgb(221 248 255 / 82%);
+    background: linear-gradient(rgb(79 141 177 / 78%), rgb(21 74 112 / 86%));
+    box-shadow: 0 -1px 0 rgb(13 47 70 / 72%), 0 -7px 22px rgb(184 235 255 / 20%) inset;
+    backdrop-filter: blur(12px) saturate(1.25);
+  }
+
+  .start-orb { position: relative; width: 3.25rem; height: 2.8rem; flex: 0 0 auto; }
+  .start-orb::before { position: absolute; top: -0.3rem; left: 0.15rem; width: 3rem; height: 3rem; box-sizing: border-box; border: 2px solid rgb(233 252 255 / 92%); border-radius: 50%; background: radial-gradient(circle at 36% 28%, #bdf78c 0 8%, #3ba550 28%, #0873a3 65%, #073f64 100%); box-shadow: 0 0 0 1px #17475f, 0 0 10px #8beaff; content: ""; }
+  .start-orb i::before { position: absolute; z-index: 1; top: 0.64rem; left: 1.12rem; width: 0.38rem; height: 0.38rem; background: #f25748; box-shadow: 0.5rem 0 #7acb45, 0 0.5rem #4ca9df, 0.5rem 0.5rem #f5ce45; content: ""; transform: skewY(-7deg); }
+
+  .taskbar-app { width: 10rem; height: 2.1rem; box-sizing: border-box; display: flex; align-items: center; gap: 0.45rem; padding: 0 0.62rem; border: 1px solid rgb(13 55 82 / 75%); border-radius: 3px; background: linear-gradient(rgb(183 229 245 / 55%), rgb(41 111 151 / 62%)); color: white; font-size: 0.7rem; text-shadow: 0 1px #174765; box-shadow: 0 1px rgb(255 255 255 / 48%) inset, 0 0 8px rgb(156 226 255 / 28%) inset; }
+  .taskbar-app__icon { width: 1.45rem; height: 1.3rem; flex: 0 0 auto; filter: drop-shadow(0 1px 1px #17465b); }
+  .taskbar-tray { margin-left: auto; color: white; font-size: 0.67rem; text-shadow: 0 1px #174765; border: 0; background: transparent; cursor: pointer; font: inherit; padding: 0; }
+  .taskbar-tray:hover { color: #cdeefb; }
+  .taskbar-tray:focus-visible { outline: 1px solid #cdeefb; outline-offset: 2px; border-radius: 2px; }
+
+  @media (max-width: 38rem) {
+    .messenger-page { min-height: 100dvh; padding: 0; place-items: start stretch; overflow: visible; }
+    .messenger-page::before, .win7-taskbar { display: none; }
+    .messenger-window { width: 100%; height: 100dvh; min-height: 34rem; padding: 0; border: 0; border-radius: 0; }
+    .window-titlebar { padding-left: 0.35rem; }
+    .window-controls { margin-right: 0; }
+    .messenger-surface { border-right: 0; border-bottom: 0; border-left: 0; }
+    .messenger-toolbar { gap: 0.7rem; padding: 0 0.55rem; }
+    .messenger-toolbar span:nth-child(6) { display: none; }
+    .contact-bar, .chat-workspace { grid-template-columns: 5.45rem minmax(0, 1fr); }
+    .contact-bar { min-height: 5.5rem; padding: 0.45rem 0.7rem 0.45rem 0.55rem; }
+    .avatar--contact { width: 4.4rem; height: 4.4rem; font-size: 0.82rem; }
+    .contact-bar h1 { font-size: 0.96rem; }
+    .contact-bar p { font-size: 0.68rem; }
+    .avatar--self { right: 0.55rem; width: 4rem; height: 4rem; }
+    .avatar--self span::before { top: 0.62rem; width: 1.15rem; height: 1.15rem; }
+    .avatar--self span::after { bottom: 0.55rem; width: 2.35rem; height: 1.45rem; }
+    .conversation { padding: 0.7rem; }
+    .messenger-statusbar span:first-child { display: none; }
+    .messenger-statusbar { justify-content: flex-end; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .link-preview, .choices button { transition: none; }
+    .choices button { transition: none; }
   }
 </style>
