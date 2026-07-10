@@ -1,27 +1,249 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Hero from "../components/Hero.astro";
-import FeaturedProjects from "../components/FeaturedProjects.astro";
-import RecentPosts from "../components/RecentPosts.astro";
-import { getFeaturedProjectEntries } from "../lib/projects";
-import { getRecentPostEntries } from "../lib/posts";
 
 const name = "Davi Oliveira";
-const tagline = "Building minimal software.";
-
-const featuredEntries = await getFeaturedProjectEntries();
-const recentPostEntries = await getRecentPostEntries();
+const description = "Crio software minimalista, com atenção aos detalhes.";
 ---
 
 <BaseLayout
-  title={`${name} — building minimal software`}
-  description={`${name} — ${tagline}.`}
+  title={`${name} — software minimalista`}
+  description={`${name} — ${description}`}
+  showChrome={false}
 >
-  <div class="page">
-    <Hero name={name} tagline={tagline} />
-    <hr class="section-divider" />
-    <FeaturedProjects projects={featuredEntries} />
-    <hr class="section-divider" />
-    <RecentPosts posts={recentPostEntries} />
+  <div class="messenger-page">
+    <section class="messenger-window" aria-label={`Conversa com ${name}`} data-msn-chat>
+      <header class="window-titlebar">
+        <div class="window-brand" aria-hidden="true">
+          <span class="butterfly butterfly--blue"></span>
+          <span class="butterfly butterfly--green"></span>
+          <span class="butterfly butterfly--orange"></span>
+        </div>
+        <p>Windows Live Messenger</p>
+        <div class="window-controls" aria-hidden="true"><i></i><i></i><i></i></div>
+      </header>
+
+      <div class="contact-bar">
+        <div class="avatar" aria-hidden="true">DO</div>
+        <div>
+          <h1>{name}</h1>
+          <p><span class="status-dot"></span> online</p>
+        </div>
+      </div>
+
+      <div class="conversation" data-messages aria-live="polite">
+        <article class="message message--received">
+          <div class="message-avatar" aria-hidden="true">D</div>
+          <div>
+            <p class="message-meta">Davi · agora</p>
+            <p class="bubble">Olá.</p>
+          </div>
+        </article>
+        <article class="message message--received">
+          <div class="message-avatar" aria-hidden="true">D</div>
+          <div>
+            <p class="message-meta">Davi · agora</p>
+            <p class="bubble">Eu sou {name}. {description}</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="choice-panel">
+        <p>Escolha onde continuar:</p>
+        <div class="choices" aria-label="Links de Davi">
+          <button
+            type="button"
+            data-social-choice
+            data-label="github"
+            data-url="https://github.com/davicbtoliveira"
+            data-domain="github.com/davicbtoliveira"
+            data-title="GitHub · Davi Oliveira"
+            data-copy="Projetos, experimentos e código aberto."
+          >
+            <span aria-hidden="true">⌘</span> github
+          </button>
+          <button
+            type="button"
+            data-social-choice
+            data-label="linkedin"
+            data-url="https://linkedin.com/in/dcbto"
+            data-domain="linkedin.com/in/dcbto"
+            data-title="LinkedIn · Davi Oliveira"
+            data-copy="Experiência, trajetória e formas de trabalhar junto."
+          >
+            <span aria-hidden="true">↗</span> linkedin
+          </button>
+        </div>
+      </div>
+    </section>
+    <p class="messenger-note">feito com cuidado, sem buzzwords</p>
   </div>
 </BaseLayout>
+
+<script is:inline>
+  const chat = document.querySelector("[data-msn-chat]");
+
+  if (chat) {
+    const messages = chat.querySelector("[data-messages]");
+    const choices = chat.querySelectorAll("[data-social-choice]");
+
+    choices.forEach((choice) => {
+      choice.addEventListener("click", () => {
+        const { label, url, domain, title, copy } = choice.dataset;
+        if (!label || !url || !domain || !title || !copy || !messages) return;
+
+        const sent = document.createElement("article");
+        sent.className = "message message--sent";
+        sent.innerHTML = `<div><p class="message-meta">você · agora</p><p class="bubble">${label}</p></div>`;
+
+        const received = document.createElement("article");
+        received.className = "message message--received message--link";
+        received.innerHTML = `
+          <div class="message-avatar" aria-hidden="true">D</div>
+          <div>
+            <p class="message-meta">Davi · agora</p>
+            <p class="bubble">Aqui está:</p>
+            <a class="link-preview" href="${url}" target="_blank" rel="noreferrer">
+              <span class="link-preview__accent"></span>
+              <span class="link-preview__content">
+                <strong>${title}</strong>
+                <span>${copy}</span>
+                <small>${domain}</small>
+              </span>
+              <span class="link-preview__open" aria-hidden="true">↗</span>
+            </a>
+          </div>`;
+
+        messages.append(sent, received);
+        choice.setAttribute("aria-pressed", "true");
+        choice.disabled = true;
+        received.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+    });
+  }
+</script>
+
+<style>
+  :global(body) {
+    background: #cae5fa;
+  }
+
+  .messenger-page {
+    --ink: #17335e;
+    --blue: #2669c9;
+    --soft-blue: #e5f3ff;
+    --received: #fff;
+    --sent: #d6efff;
+    --line: #9dc5ec;
+    --online: #6fc535;
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+    padding: 2rem 1rem;
+    background:
+      radial-gradient(circle at 12% 8%, rgb(255 255 255 / 75%) 0 2px, transparent 2.5px) 0 0 / 32px 32px,
+      linear-gradient(150deg, #e7f5ff 0%, #b5dcf7 50%, #8bc0ea 100%);
+    color: var(--ink);
+    font-family: "Trebuchet MS", Arial, sans-serif;
+  }
+
+  .messenger-window {
+    width: min(100%, 42rem);
+    overflow: hidden;
+    border: 1px solid #2665b8;
+    border-radius: 10px 10px 5px 5px;
+    background: #f8fcff;
+    box-shadow: 0 24px 60px rgb(21 67 113 / 28%), 0 4px 0 rgb(255 255 255 / 60%) inset;
+  }
+
+  .window-titlebar {
+    height: 2.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0 0.6rem;
+    background: linear-gradient(#5897e5, #2464ba 54%, #1e55a5);
+    color: white;
+  }
+
+  .window-titlebar p {
+    flex: 1;
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: bold;
+    text-shadow: 0 1px #184a91;
+  }
+
+  .window-brand { display: flex; gap: 2px; transform: rotate(-15deg); }
+  .butterfly { width: 7px; height: 12px; border-radius: 8px 2px 8px 2px; display: block; }
+  .butterfly--blue { background: #c7f4ff; }
+  .butterfly--green { background: #93ed53; height: 9px; margin-top: 3px; }
+  .butterfly--orange { background: #ffc051; }
+  .window-controls { display: flex; gap: 2px; }
+  .window-controls i { width: 15px; height: 14px; box-sizing: border-box; border: 1px solid #a9d2ff; background: linear-gradient(#72acef, #3674c9); }
+  .window-controls i:last-child { background: linear-gradient(#ed8e8e, #c64b50); border-color: #ffa8a8; }
+
+  .contact-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.95rem 1.2rem;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(90deg, #f7fcff, #dcefff);
+  }
+
+  .avatar, .message-avatar {
+    display: grid;
+    place-items: center;
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(135deg, #426eb2, #172f63);
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #80add8;
+  }
+
+  .avatar { width: 2.6rem; height: 2.6rem; border-radius: 5px; font-size: 0.75rem; }
+  .contact-bar h1 { margin: 0; color: #17335e; font-size: 1rem; line-height: 1.2; }
+  .contact-bar p { margin: 0.16rem 0 0; color: #527398; font-size: 0.76rem; }
+  .status-dot { display: inline-block; width: 0.52rem; height: 0.52rem; margin-right: 0.22rem; border-radius: 50%; background: var(--online); box-shadow: 0 0 0 1px #519720; }
+
+  .conversation { min-height: 17rem; max-height: 26rem; overflow-y: auto; padding: 1.25rem 1.2rem 1.6rem; background: #edf8ff; }
+  .message { display: flex; align-items: flex-end; gap: 0.58rem; margin-top: 0.95rem; }
+  .message:first-child { margin-top: 0; }
+  .message-avatar { width: 1.8rem; height: 1.8rem; flex: 0 0 auto; border-radius: 50%; font-size: 0.68rem; }
+  .message > div:last-child { max-width: min(31rem, calc(100vw - 8.5rem)); }
+  .message-meta { margin: 0 0 0.25rem; color: #6e8aaa; font-size: 0.69rem; }
+  .bubble { width: fit-content; max-width: 100%; margin: 0; padding: 0.58rem 0.75rem; border: 1px solid #c7dced; border-radius: 2px 12px 12px 12px; background: var(--received); color: #203f67; font-size: 0.9rem; line-height: 1.42; box-shadow: 0 1px 1px rgb(37 97 147 / 8%); }
+  .message--sent { justify-content: flex-end; }
+  .message--sent > div { display: grid; justify-items: end; }
+  .message--sent .bubble { border-radius: 12px 2px 12px 12px; border-color: #9ecfe9; background: var(--sent); }
+  .message--link { align-items: flex-start; }
+
+  .link-preview { width: min(100%, 27rem); box-sizing: border-box; display: flex; gap: 0.75rem; overflow: hidden; margin-top: 0.45rem; border: 1px solid #c5d7e8; border-radius: 5px; background: #f9fcff; color: #254b7f; text-decoration: none; box-shadow: 0 2px 5px rgb(30 73 118 / 10%); transition: transform 140ms ease, box-shadow 140ms ease; }
+  .link-preview:hover { color: #254b7f; transform: translateY(-1px); box-shadow: 0 5px 10px rgb(30 73 118 / 16%); }
+  .link-preview__accent { width: 4px; flex: 0 0 auto; background: linear-gradient(#738bd8, #41a6db); }
+  .link-preview__content { min-width: 0; display: grid; gap: 0.18rem; padding: 0.7rem 0; }
+  .link-preview strong { font-size: 0.83rem; }
+  .link-preview span { color: #57728f; font-size: 0.75rem; line-height: 1.35; }
+  .link-preview small { color: #7690a9; font-size: 0.68rem; }
+  .link-preview__open { padding: 0.65rem 0.7rem 0 0; color: #5786b7; font-size: 1rem; }
+
+  .choice-panel { padding: 0.85rem 1.2rem 1rem; border-top: 1px solid var(--line); background: #f7fcff; }
+  .choice-panel p { margin: 0 0 0.55rem; color: #537596; font-size: 0.76rem; }
+  .choices { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .choices button { border: 1px solid #89b5df; border-radius: 4px; padding: 0.45rem 0.7rem; background: linear-gradient(#fff, #e6f3fe); color: #24578e; cursor: pointer; font: 700 0.8rem "Trebuchet MS", Arial, sans-serif; transition: border-color 140ms ease, background 140ms ease, transform 140ms ease; }
+  .choices button:hover { border-color: #477fb9; background: #d7ebfb; transform: translateY(-1px); }
+  .choices button:disabled { cursor: default; opacity: 0.52; transform: none; }
+  .choices button span { color: #1f78bd; font-size: 1rem; vertical-align: -1px; }
+  .messenger-note { margin: 0.75rem 0 0; color: #396f9e; font: 0.69rem "DM Mono", ui-monospace, monospace; text-align: center; }
+
+  @media (max-width: 32rem) {
+    .messenger-page { padding: 0; place-items: start stretch; }
+    .messenger-window { width: 100%; min-height: 100vh; border: 0; border-radius: 0; }
+    .conversation { min-height: 0; max-height: none; }
+    .messenger-note { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .link-preview, .choices button { transition: none; }
+  }
+</style>

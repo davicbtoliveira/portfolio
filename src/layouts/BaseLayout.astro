@@ -10,6 +10,7 @@ type Props = {
   canonicalPath?: string;
   imagePath?: string;
   ogType?: "website" | "article";
+  showChrome?: boolean;
 };
 
 const siteUrl = "https://dcbto.dev";
@@ -19,6 +20,7 @@ const {
   canonicalPath = Astro.url.pathname,
   imagePath = "/og/default.png",
   ogType = "website",
+  showChrome = true,
 } = Astro.props;
 const canonical = new URL(canonicalPath, siteUrl).toString();
 const image = new URL(imagePath, siteUrl).toString();
@@ -55,11 +57,11 @@ const analyticsToken = import.meta.env.PUBLIC_CF_WEB_ANALYTICS_TOKEN;
     </script>
   </head>
   <body>
-    <Header />
+    {showChrome && <Header />}
     <main style="flex: 1">
       <slot />
     </main>
-    <Footer />
+    {showChrome && <Footer />}
     <script is:inline>
       (() => {
         function updateFilter() {
