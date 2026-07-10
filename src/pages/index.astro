@@ -148,14 +148,15 @@ const description = "Crio software minimalista, com atenção aos detalhes.";
   .messenger-window {
     width: min(100%, 57rem);
     overflow: hidden;
-    border: 1px solid #5b9dc1;
-    border-radius: 8px 8px 3px 3px;
+    border: 1px solid #4b89b5;
+    border-radius: 8px 8px 4px 4px;
     background: white;
     box-shadow:
-      0 0 0 1px rgb(230 248 255 / 88%),
-      0 0 0 2px rgb(42 104 151 / 56%),
+      0 0 0 1px rgb(235 251 255 / 92%),
+      0 0 0 2px rgb(42 104 151 / 68%),
       0 24px 60px rgb(27 65 87 / 32%),
-      0 2px 0 rgb(255 255 255 / 82%) inset;
+      0 2px 0 rgb(255 255 255 / 90%) inset,
+      0 0 16px rgb(140 210 246 / 35%);
   }
 
   .window-titlebar {
@@ -178,11 +179,14 @@ const description = "Crio software minimalista, com atenção aos detalhes.";
   }
 
   .msn-icon { width: 1.15rem; height: 1rem; flex: 0 0 auto; filter: drop-shadow(0 1px rgb(255 255 255 / 75%)); }
-  .window-controls { display: flex; align-self: stretch; gap: 1px; }
-  .window-controls i { display: grid; width: 1.8rem; box-sizing: border-box; place-items: center; border: 1px solid #7daac4; border-top: 0; background: linear-gradient(#e7f7ff, #9ed0eb); color: #315f7c; font-family: Arial, sans-serif; font-size: 0.74rem; font-style: normal; text-shadow: 0 1px white; }
-  .window-controls i::after { content: "—"; margin-top: -0.22rem; }
+  .window-controls { display: flex; align-self: stretch; margin-right: -0.4rem; overflow: hidden; border-radius: 0 0 6px 6px; }
+  .window-controls i { position: relative; display: grid; width: 2rem; box-sizing: border-box; place-items: center; border: 0; border-bottom: 1px solid #4e91bc; border-left: 1px solid rgb(81 143 181 / 58%); background: linear-gradient(#dff4ff 0%, #afdcef 48%, #77b9dd 100%); color: #315f7c; font-family: Arial, sans-serif; font-size: 0.74rem; font-style: normal; text-shadow: 0 1px white; box-shadow: 0 1px 0 rgb(255 255 255 / 84%) inset, -1px 0 rgb(255 255 255 / 46%) inset; }
+  .window-controls i::before { position: absolute; inset: 1px 1px 48%; border-radius: 0 0 3px 3px; background: rgb(255 255 255 / 43%); content: ""; }
+  .window-controls i::after { position: relative; content: "—"; margin-top: -0.22rem; }
+  .window-controls i:first-child { border-radius: 0 0 0 5px; }
   .window-controls i:nth-child(2)::after { content: "□"; margin-top: -0.1rem; font-size: 0.69rem; }
-  .window-controls i:last-child { background: linear-gradient(#edaaa5, #c9504b); border-color: #bd7773; color: white; text-shadow: 0 1px #93433e; }
+  .window-controls i:last-child { width: 2.2rem; border-color: #a64845; border-radius: 0 0 5px 0; background: linear-gradient(#f3b6b1 0%, #e87e76 43%, #c84c49 100%); color: white; text-shadow: 0 1px #93433e; box-shadow: 0 1px 0 rgb(255 239 236 / 78%) inset; }
+  .window-controls i:last-child::before { background: rgb(255 244 241 / 35%); }
   .window-controls i:last-child::after { content: "×"; margin-top: -0.08rem; font-size: 1rem; }
 
   .messenger-toolbar {
