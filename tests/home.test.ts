@@ -5,11 +5,16 @@ import { parse, HTMLElement } from "node-html-parser";
 
 describe("home page", () => {
   let root: HTMLElement;
+  let css: string;
 
   beforeAll(() => {
     execSync("pnpm build", { stdio: "pipe" });
     const html = readFileSync("dist/index.html", "utf-8");
     root = parse(html);
+    css = root
+      .querySelectorAll('link[rel="stylesheet"]')
+      .map((link) => readFileSync(`dist${link.getAttribute("href")}`, "utf-8"))
+      .join("\n");
   }, 120_000);
 
   it("contains the messenger contact heading", () => {
@@ -18,10 +23,14 @@ describe("home page", () => {
     expect(h1?.text).toContain("Davi Oliveira");
   });
 
-  it('sets data-theme="light" on the <html> element', () => {
+  it("sets the home theme, language, and Messenger favicon", () => {
     const html = root.querySelector("html");
     expect(html).not.toBeNull();
     expect(html?.getAttribute("data-theme")).toBe("light");
+    expect(html?.getAttribute("lang")).toBe("pt-BR");
+    expect(root.querySelector('link[rel="icon"]')?.getAttribute("href")).toBe(
+      "/msn-messenger.svg",
+    );
   });
 
   it("renders shared SEO metadata for link previews", () => {
@@ -56,8 +65,9 @@ describe("home page", () => {
   });
 
   it("renders an MSN-style transcript with two opening messages", () => {
-    expect(root.querySelector(".messenger-toolbar")?.text).toContain("Perfil");
+    expect(root.querySelector(".messenger-toolbar")?.text).toContain("Fotos");
     expect(root.querySelector(".messenger-toolbar")?.text).toContain("Arquivos");
+    expect(root.querySelector(".messenger-toolbar")?.text).toContain("Vídeo");
 
     const messages = root.querySelectorAll("[data-messages] .message--received");
     expect(messages.length).toBe(2);
@@ -66,25 +76,38 @@ describe("home page", () => {
     expect(messages[1]?.text).toContain("Crio software minimalista");
   });
 
-  it("offers GitHub and LinkedIn as messenger choices", () => {
+  it("offers GitHub, LinkedIn, and email as messenger choices", () => {
     const choices = root.querySelectorAll("button[data-social-choice]");
-    expect(choices.length).toBe(2);
-    expect(root.querySelector(".msn-icon")).not.toBeNull();
-    expect(root.querySelectorAll("button[data-social-choice] .social-icon").length).toBe(2);
+    expect(choices.length).toBe(3);
+    expect(root.querySelector("[data-messenger-icon]")?.getAttribute("src")).toBe(
+      "/msn-messenger.svg",
+    );
+    expect(root.querySelector(".composer-field")).not.toBeNull();
+    expect(root.querySelectorAll("button[data-social-choice] .social-icon").length).toBe(3);
     expect(choices[0]?.getAttribute("data-url")).toBe(
       "https://github.com/davicbtoliveira",
     );
     expect(choices[1]?.getAttribute("data-url")).toBe(
       "https://linkedin.com/in/dcbto",
     );
+    expect(choices[2]?.getAttribute("data-label")).toBe("contato");
+    expect(choices[2]?.getAttribute("data-url")).toBe(
+      "mailto:davicbtoliveira@gmail.com",
+    );
   });
 
-  it("adds sent and Discord-style preview messages after a choice", () => {
+  it("adds sent and classic Messenger link messages after a choice", () => {
     const scripts = Array.from(root.querySelectorAll("script:not([type])"))
       .map((script) => script.text)
       .join("\n");
     expect(scripts).toContain("message--sent");
-    expect(scripts).toContain("link-preview");
+    expect(scripts).toContain("message-link");
+    expect(scripts).toContain('matchMedia("(prefers-reduced-motion: reduce)")');
     expect(scripts).toContain("target=\"_blank\"");
+  });
+
+  it("styles messages inserted at runtime without Astro scope attributes", () => {
+    expect(css).toMatch(/\.conversation\[data-astro-cid-[^\]]+\] \.message-meta/);
+    expect(css).not.toMatch(/\.message-meta\[data-astro-cid-/);
   });
 });
