@@ -12,16 +12,16 @@ describe("home page", () => {
     root = parse(html);
   }, 120_000);
 
-  it("contains the hero heading", () => {
+  it("contains the messenger contact heading", () => {
     const h1 = root.querySelector("h1");
     expect(h1).not.toBeNull();
     expect(h1?.text).toContain("Davi Oliveira");
   });
 
-  it('sets data-theme="dark" on the <html> element', () => {
+  it('sets data-theme="light" on the <html> element', () => {
     const html = root.querySelector("html");
     expect(html).not.toBeNull();
-    expect(html?.getAttribute("data-theme")).toBe("dark");
+    expect(html?.getAttribute("data-theme")).toBe("light");
   });
 
   it("renders shared SEO metadata for link previews", () => {
@@ -30,7 +30,7 @@ describe("home page", () => {
     ).toBe("https://dcbto.dev/");
     expect(
       root.querySelector('meta[property="og:title"]')?.getAttribute("content"),
-    ).toBe("Davi Oliveira — building minimal software");
+    ).toBe("Davi Oliveira — software minimalista");
     expect(
       root.querySelector('meta[name="twitter:card"]')?.getAttribute("content"),
     ).toBe("summary_large_image");
@@ -41,11 +41,7 @@ describe("home page", () => {
     expect(moduleScripts.length).toBe(1);
   });
 
-  it("includes a persisted theme toggle and pre-paint theme bootstrap", () => {
-    const toggle = root.querySelector("button[data-theme-toggle]");
-    expect(toggle).not.toBeNull();
-    expect(toggle?.getAttribute("aria-label")).toBe("Toggle color theme");
-
+  it("includes the shared pre-paint theme bootstrap", () => {
     const bootstrap = root.querySelector("script[data-theme-bootstrap]");
     expect(bootstrap).not.toBeNull();
     expect(bootstrap?.text).toContain('localStorage.getItem("theme")');
@@ -59,21 +55,30 @@ describe("home page", () => {
     );
   });
 
-  it("renders a featured real project inside a card linking to its detail route", () => {
-    const projectLinks = root.querySelectorAll(
-      'a[href="/projects/imageforge"]',
-    );
-    expect(projectLinks.length).toBeGreaterThanOrEqual(1);
-    const linkText = Array.from(projectLinks).map((a) => a.text);
-    expect(linkText.some((t) => t?.includes("ImageForge"))).toBe(true);
+  it("renders two opening messages in the messenger conversation", () => {
+    const messages = root.querySelectorAll("[data-messages] .message--received");
+    expect(messages.length).toBe(2);
+    expect(messages[0]?.text).toContain("Olá.");
+    expect(messages[1]?.text).toContain("Crio software minimalista");
   });
 
-  it("renders the seed post inside a card linking to its detail route", () => {
-    const postLinks = root.querySelectorAll('a[href="/blog/example"]');
-    expect(postLinks.length).toBeGreaterThanOrEqual(1);
-    const linkText = Array.from(postLinks).map((a) => a.text);
-    expect(linkText.some((t) => t?.includes("An example blog post"))).toBe(
-      true,
+  it("offers GitHub and LinkedIn as messenger choices", () => {
+    const choices = root.querySelectorAll("button[data-social-choice]");
+    expect(choices.length).toBe(2);
+    expect(choices[0]?.getAttribute("data-url")).toBe(
+      "https://github.com/davicbtoliveira",
     );
+    expect(choices[1]?.getAttribute("data-url")).toBe(
+      "https://linkedin.com/in/dcbto",
+    );
+  });
+
+  it("adds sent and Discord-style preview messages after a choice", () => {
+    const scripts = Array.from(root.querySelectorAll("script:not([type])"))
+      .map((script) => script.text)
+      .join("\n");
+    expect(scripts).toContain("message--sent");
+    expect(scripts).toContain("link-preview");
+    expect(scripts).toContain("target=\"_blank\"");
   });
 });
