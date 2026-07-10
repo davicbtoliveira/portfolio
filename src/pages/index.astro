@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import DesktopIcons from "../components/DesktopIcons.astro";
 
 const name = "Davi Oliveira";
 const description = "Crio software minimalista, com atenção aos detalhes.";
@@ -14,7 +13,6 @@ const description = "Crio software minimalista, com atenção aos detalhes.";
   showChrome={false}
 >
   <div class="messenger-page">
-    <DesktopIcons />
     <section class="messenger-window" aria-label={`Conversa com ${name}`} data-i18n-attr="aria-label:windowAriaLabel" data-msn-chat>
       <header class="window-titlebar">
         <img class="msn-icon" src="/msn-messenger.svg" alt="" aria-hidden="true" data-messenger-icon />
@@ -120,38 +118,8 @@ const description = "Crio software minimalista, com atenção aos detalhes.";
     </section>
 
     <div class="win7-taskbar" aria-hidden="true">
-      <span class="start-orb">
-        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="orbGrad" cx="36%" cy="28%" r="68%">
-              <stop offset="0%" stop-color="#bef28c"/>
-              <stop offset="10%" stop-color="#7cd654"/>
-              <stop offset="30%" stop-color="#35a6b0"/>
-              <stop offset="55%" stop-color="#0d7096"/>
-              <stop offset="80%" stop-color="#064565"/>
-              <stop offset="100%" stop-color="#032a3f"/>
-            </radialGradient>
-            <radialGradient id="highlightGrad" cx="28%" cy="20%" r="60%">
-              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.65"/>
-              <stop offset="30%" stop-color="#ffffff" stop-opacity="0.15"/>
-              <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-            </radialGradient>
-            <radialGradient id="shadowGrad" cx="50%" cy="50%" r="50%">
-              <stop offset="78%" stop-color="#000000" stop-opacity="0"/>
-              <stop offset="92%" stop-color="#000000" stop-opacity="0.08"/>
-              <stop offset="100%" stop-color="#000000" stop-opacity="0.3"/>
-            </radialGradient>
-          </defs>
-          <circle cx="24" cy="24" r="22" fill="url(#orbGrad)" stroke="rgba(233,252,255,0.5)" stroke-width="1"/>
-          <circle cx="24" cy="24" r="22" fill="url(#shadowGrad)"/>
-          <g transform="translate(14, 14) skewY(-7)">
-            <rect x="0" y="0" width="6" height="6" fill="#E74B2C"/>
-            <rect x="7.5" y="0" width="6" height="6" fill="#7CC347"/>
-            <rect x="0" y="7.5" width="6" height="6" fill="#41A5DE"/>
-            <rect x="7.5" y="7.5" width="6" height="6" fill="#FDDC4C"/>
-          </g>
-          <circle cx="24" cy="24" r="22" fill="url(#highlightGrad)"/>
-        </svg>
+      <span class="start-orb" aria-label="Iniciar">
+        <img src="/win7-orb.png" alt="" />
       </span>
       <span class="taskbar-app">
         <img class="taskbar-app__icon" src="/msn-messenger.svg" alt="" />
@@ -568,7 +536,7 @@ const description = "Crio software minimalista, com atenção aos detalhes.";
   }
 
   .start-orb { position: relative; width: 3.25rem; height: 2.8rem; flex: 0 0 auto; }
-.start-orb svg { position: absolute; top: -0.3rem; left: 0.15rem; width: 3rem; height: 3rem; display: block; filter: drop-shadow(0 0 6px rgb(139 234 255 / 60%)); }
+.start-orb img { position: absolute; top: -0.3rem; left: 0.15rem; width: 3rem; height: 3rem; display: block; filter: drop-shadow(0 0 6px rgb(139 234 255 / 60%)); image-rendering: auto; }
 
   .taskbar-app { width: 10rem; height: 2.1rem; box-sizing: border-box; display: flex; align-items: center; gap: 0.45rem; padding: 0 0.62rem; border: 1px solid rgb(13 55 82 / 75%); border-radius: 3px; background: linear-gradient(rgb(183 229 245 / 55%), rgb(41 111 151 / 62%)); color: white; font-size: 0.7rem; text-shadow: 0 1px #174765; box-shadow: 0 1px rgb(255 255 255 / 48%) inset, 0 0 8px rgb(156 226 255 / 28%) inset; }
   .taskbar-app__icon { width: 1.45rem; height: 1.3rem; flex: 0 0 auto; filter: drop-shadow(0 1px 1px #17465b); }

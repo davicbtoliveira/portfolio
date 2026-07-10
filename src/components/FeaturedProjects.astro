@@ -15,7 +15,7 @@ const { projects } = Astro.props;
       <h2 class="section-heading">Featured Projects</h2>
       <div class="project-list">
         {projects.map((entry) => (
-          <ProjectCard project={entry.data} href={`/projects/${entry.id}`} stats={entry.stats} />
+          <ProjectCard project={entry.data} href={`/projects/${entry.id}`} />
         ))}
       </div>
     </section>

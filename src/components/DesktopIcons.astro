@@ -16,79 +16,121 @@ const desktopIcons = [
           {icon.id === "computer" && (
             <svg viewBox="0 0 48 48" class="ico">
               <defs>
-                <linearGradient id="mon-bezel" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#d3dade" />
-                  <stop offset="1" stop-color="#8b9298" />
+                <linearGradient id="c-bezel" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#2d3238"/><stop offset="0.12" stop-color="#3b424a"/><stop offset="0.5" stop-color="#555d66"/><stop offset="0.88" stop-color="#3b424a"/><stop offset="1" stop-color="#2d3238"/>
                 </linearGradient>
-                <linearGradient id="mon-screen" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#48a9ec" />
-                  <stop offset="1" stop-color="#0b5cab" />
+                <linearGradient id="c-screen" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#1a60b5"/><stop offset="1" stop-color="#0d3b7a"/>
                 </linearGradient>
+                <linearGradient id="c-stand" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#6a717a"/><stop offset="1" stop-color="#3b424a"/>
+                </linearGradient>
+                <linearGradient id="c-base" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#889099"/><stop offset="1" stop-color="#4a525a"/>
+                </linearGradient>
+                <radialGradient id="c-gloss" cx="0.3" cy="0.25" r="0.8">
+                  <stop offset="0" stop-color="#fff" stop-opacity="0.35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+                </radialGradient>
               </defs>
-              <rect x="20" y="37" width="8" height="5" fill="#9aa1a8" />
-              <rect x="14" y="41" width="20" height="4" rx="2" fill="#bcc3c9" />
-              <rect x="6" y="6" width="36" height="30" rx="3" fill="url(#mon-bezel)" stroke="#6f757b" stroke-width="0.8" />
-              <rect x="9" y="9" width="30" height="24" rx="1.5" fill="url(#mon-screen)" />
-              <rect x="11" y="11" width="13" height="8" rx="1" fill="#cdeafb" opacity="0.5" />
+              <rect x="18" y="37" width="12" height="4" rx="1" fill="url(#c-stand)" />
+              <rect x="12" y="40" width="24" height="5" rx="2.5" fill="url(#c-base)" />
+              <rect x="5" y="5" width="38" height="30" rx="3.5" fill="url(#c-bezel)" />
+              <rect x="8" y="8" width="32" height="24" rx="1.5" fill="url(#c-screen)" />
+              <rect x="8" y="8" width="32" height="24" rx="1.5" fill="url(#c-gloss)" />
+              <path d="M22 13 L26 13 L24 17 Z" fill="#fff" opacity="0.3" />
+              <circle cx="24" cy="23" r="7" fill="none" stroke="#fff" stroke-width="0.6" opacity="0.25" />
             </svg>
           )}
           {icon.id === "recyclebin" && (
             <svg viewBox="0 0 48 48" class="ico">
               <defs>
-                <linearGradient id="bin-body" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#cdeef5" />
-                  <stop offset="1" stop-color="#5fb8cf" />
+                <linearGradient id="rb-body" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#e2f0f4"/><stop offset="0.25" stop-color="#c5e4ec"/><stop offset="0.5" stop-color="#f0f8fa"/><stop offset="0.75" stop-color="#c5e4ec"/><stop offset="1" stop-color="#9cc8d6"/>
+                </linearGradient>
+                <linearGradient id="rb-lid" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#d9edf2"/><stop offset="1" stop-color="#a3cdd9"/>
+                </linearGradient>
+                <linearGradient id="rb-handle" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#8dbecd"/><stop offset="1" stop-color="#589aae"/>
                 </linearGradient>
               </defs>
-              <rect x="12" y="10" width="24" height="5" rx="2.5" fill="#82c9da" stroke="#4390a4" stroke-width="0.6" />
-              <rect x="20" y="6" width="8" height="4" rx="2" fill="#82c9da" stroke="#4390a4" stroke-width="0.6" />
-              <path d="M14 16 h20 l-2 26 a2 2 0 0 1 -2 2 h-12 a2 2 0 0 1 -2 -2 z" fill="url(#bin-body)" stroke="#3f93a8" stroke-width="0.8" />
-              <line x1="20" y1="18" x2="19" y2="42" stroke="#3f93a8" stroke-width="0.8" opacity="0.55" />
-              <line x1="24" y1="18" x2="24" y2="42" stroke="#3f93a8" stroke-width="0.8" opacity="0.55" />
-              <line x1="28" y1="18" x2="29" y2="42" stroke="#3f93a8" stroke-width="0.8" opacity="0.55" />
+              <rect x="19" y="3" width="10" height="4" rx="2" fill="url(#rb-handle)" />
+              <rect x="17" y="6" width="14" height="3.5" rx="1.5" fill="url(#rb-lid)" />
+              <path d="M14 11 l-2 32 a2 2 0 0 0 2 2 h20 a2 2 0 0 0 2 -2 l-2 -32 z" fill="url(#rb-body)" />
+              <path d="M14 11 a2.8 2.8 0 0 1 20 0 l-0.5 1.5 a2.8 2.8 0 0 0 -19 0 z" fill="#f0f8fa" opacity="0.5" />
+              <line x1="18" y1="13" x2="17" y2="42" stroke="#7fb8c8" stroke-width="1.2" opacity="0.5" />
+              <line x1="22" y1="13" x2="21.5" y2="42" stroke="#7fb8c8" stroke-width="1.2" opacity="0.5" />
+              <line x1="26" y1="13" x2="26.5" y2="42" stroke="#7fb8c8" stroke-width="1.2" opacity="0.5" />
+              <line x1="30" y1="13" x2="31" y2="42" stroke="#7fb8c8" stroke-width="1.2" opacity="0.5" />
+              <path d="M17 42 a1.5 1.5 0 0 0 14 0" fill="#4e8fa0" opacity="0.3" />
             </svg>
           )}
           {icon.id === "userfiles" && (
             <svg viewBox="0 0 48 48" class="ico">
               <defs>
-                <linearGradient id="folder" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#ffe07a" />
-                  <stop offset="1" stop-color="#f4b400" />
+                <linearGradient id="uf-front" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#fdd940"/><stop offset="0.6" stop-color="#eeb200"/><stop offset="1" stop-color="#cc8e00"/>
+                </linearGradient>
+                <linearGradient id="uf-back" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#ffe680"/><stop offset="1" stop-color="#fdd940"/>
                 </linearGradient>
               </defs>
-              <path d="M6 14 h12 l4 5 h20 a2 2 0 0 1 2 2 v17 a2 2 0 0 1 -2 2 H6 a2 2 0 0 1 -2 -2 V16 a2 2 0 0 1 2 -2 z" fill="url(#folder)" stroke="#d99a00" stroke-width="0.8" />
-              <circle cx="24" cy="28" r="7" fill="#2f6fb0" opacity="0.92" />
-              <circle cx="24" cy="25.5" r="2.3" fill="#fff" />
-              <path d="M20.2 31 a3.8 3.8 0 0 1 7.6 0 z" fill="#fff" />
+              <path d="M6 11 h28 l-4 -4 h-20 z" fill="url(#uf-back)" />
+              <rect x="5" y="14" width="34" height="24" rx="2" fill="url(#uf-front)" />
+              <rect x="6" y="11" width="12" height="4" rx="1" fill="#ffe680" />
+              <circle cx="22" cy="33" r="7" fill="#1a4f8a" />
+              <circle cx="22" cy="31" r="2.5" fill="#fff" />
+              <path d="M17 37.5 a5.5 6 0 0 1 10 0 z" fill="#fff" />
             </svg>
           )}
           {icon.id === "network" && (
             <svg viewBox="0 0 48 48" class="ico">
               <defs>
-                <radialGradient id="globe" cx="40%" cy="35%" r="72%">
-                  <stop offset="0" stop-color="#86d4ff" />
-                  <stop offset="1" stop-color="#0d6fb8" />
+                <linearGradient id="nw-bezel" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#2d3238"/><stop offset="0.15" stop-color="#3b424a"/><stop offset="0.5" stop-color="#555d66"/><stop offset="0.85" stop-color="#3b424a"/><stop offset="1" stop-color="#2d3238"/>
+                </linearGradient>
+                <radialGradient id="nw-globe" cx="0.4" cy="0.35" r="0.7">
+                  <stop offset="0" stop-color="#5cb8e6"/><stop offset="1" stop-color="#0e5a9e"/>
+                </radialGradient>
+                <linearGradient id="nw-stand" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#6a717a"/><stop offset="1" stop-color="#3b424a"/>
+                </linearGradient>
+                <linearGradient id="nw-base" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#889099"/><stop offset="1" stop-color="#4a525a"/>
+                </linearGradient>
+                <radialGradient id="nw-gloss" cx="0.3" cy="0.25" r="0.8">
+                  <stop offset="0" stop-color="#fff" stop-opacity="0.35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
                 </radialGradient>
               </defs>
-              <rect x="8" y="8" width="32" height="24" rx="3" fill="#e0e7eb" stroke="#9aa1a8" stroke-width="0.8" />
-              <rect x="11" y="11" width="26" height="18" rx="1.5" fill="url(#globe)" />
-              <ellipse cx="24" cy="20" rx="6" ry="9" fill="none" stroke="#fff" stroke-width="0.8" opacity="0.7" />
-              <line x1="11" y1="20" x2="37" y2="20" stroke="#fff" stroke-width="0.8" opacity="0.7" />
-              <rect x="21" y="32" width="6" height="4" fill="#9aa1a8" />
-              <rect x="15" y="36" width="18" height="4" rx="2" fill="#bcc3c9" />
+              <rect x="18" y="37" width="12" height="4" rx="1" fill="url(#nw-stand)" />
+              <rect x="12" y="40" width="24" height="5" rx="2.5" fill="url(#nw-base)" />
+              <rect x="5" y="5" width="38" height="30" rx="3.5" fill="url(#nw-bezel)" />
+              <rect x="8" y="8" width="32" height="24" rx="1.5" fill="url(#nw-globe)" />
+              <rect x="8" y="8" width="32" height="24" rx="1.5" fill="url(#nw-gloss)" />
+              <ellipse cx="24" cy="20" rx="7" ry="11" fill="none" stroke="#fff" stroke-width="0.7" opacity="0.4" />
+              <ellipse cx="24" cy="20" rx="3.5" ry="11" fill="none" stroke="#fff" stroke-width="0.7" opacity="0.4" />
+              <line x1="8" y1="20" x2="40" y2="20" stroke="#fff" stroke-width="0.7" opacity="0.4" />
+              <line x1="8" y1="14" x2="40" y2="14" stroke="#fff" stroke-width="0.5" opacity="0.25" />
+              <line x1="8" y1="26" x2="40" y2="26" stroke="#fff" stroke-width="0.5" opacity="0.25" />
             </svg>
           )}
           {icon.id === "ie" && (
             <svg viewBox="0 0 48 48" class="ico">
               <defs>
-                <linearGradient id="ie-e" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#46aeeb" />
-                  <stop offset="1" stop-color="#0a66b0" />
-                </linearGradient>
+                <radialGradient id="ie-bg" cx="0.4" cy="0.35" r="0.7">
+                  <stop offset="0" stop-color="#3298d7"/><stop offset="0.7" stop-color="#0a54a0"/><stop offset="1" stop-color="#063766"/>
+                </radialGradient>
+                <radialGradient id="ie-gloss" cx="0.35" cy="0.3" r="0.5">
+                  <stop offset="0" stop-color="#fff" stop-opacity="0.35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+                </radialGradient>
               </defs>
-              <circle cx="24" cy="24" r="18" fill="url(#ie-e)" stroke="#0a4f8a" stroke-width="0.8" />
-              <text x="24" y="33" font-family="Georgia, 'Times New Roman', serif" font-size="26" font-weight="700" fill="#fff" text-anchor="middle">e</text>
-              <path d="M10 16 q14 -8 28 4 q-12 -2 -22 6 q10 2 16 8" fill="none" stroke="#ffd400" stroke-width="3" stroke-linecap="round" opacity="0.9" />
+              <circle cx="24" cy="24" r="18" fill="url(#ie-bg)" />
+              <circle cx="24" cy="24" r="18" fill="url(#ie-gloss)" />
+              <g transform="rotate(-18, 24, 24)">
+                <ellipse cx="24" cy="24" rx="16" ry="8.5" fill="none" stroke="#fcd116" stroke-width="2.5" opacity="0.95" />
+                <ellipse cx="24" cy="24" rx="16" ry="8.5" fill="none" stroke="#fff" stroke-width="0.7" opacity="0.3" transform="translate(-0.5, -0.5)" />
+              </g>
+              <text x="24" y="32.5" font-family="Georgia, serif" font-size="24" font-weight="700" fill="#fff" text-anchor="middle">e</text>
             </svg>
           )}
         </span>
