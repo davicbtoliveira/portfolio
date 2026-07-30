@@ -34,12 +34,12 @@ describe("listProjects", () => {
   it("filters by status and tech", () => {
     const listed = listProjects(
       [
-        makeEntry("astro", { status: "active", tech: ["astro", "typescript"] }),
+        makeEntry("svelte", { status: "active", tech: ["svelte", "typescript"] }),
         makeEntry("go", { status: "archived", tech: ["go"] }),
       ],
-      { status: "active", tech: "astro" },
+      { status: "active", tech: "svelte" },
     );
 
-    expect(listed.map((entry) => entry.id)).toEqual(["astro"]);
+    expect(listed.map((entry) => entry.id)).toEqual(["svelte"]);
   });
 });

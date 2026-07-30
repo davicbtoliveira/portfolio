@@ -31,22 +31,22 @@ describe("blog listing", () => {
   it("filters by tag", () => {
     const posts = listPosts(
       [
-        makeEntry("astro", { tags: ["astro", "typescript"] }),
+        makeEntry("svelte", { tags: ["svelte", "typescript"] }),
         makeEntry("go", { tags: ["go"] }),
       ],
-      { tag: "astro" },
+      { tag: "svelte" },
     );
 
-    expect(posts.map((post) => post.id)).toEqual(["astro"]);
+    expect(posts.map((post) => post.id)).toEqual(["svelte"]);
   });
 
   it("deduplicates and sorts tags from published posts", () => {
     const tags = listTags([
-      makeEntry("a", { tags: ["typescript", "astro"] }),
+      makeEntry("a", { tags: ["typescript", "svelte"] }),
       makeEntry("b", { draft: true, tags: ["draft-only"] }),
-      makeEntry("c", { tags: ["astro", "go"] }),
+      makeEntry("c", { tags: ["svelte", "go"] }),
     ]);
 
-    expect(tags).toEqual(["astro", "go", "typescript"]);
+    expect(tags).toEqual(["go", "svelte", "typescript"]);
   });
 });

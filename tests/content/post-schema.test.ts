@@ -5,7 +5,7 @@ const validPost = {
   title: "An example blog post",
   description: "A short description that fits within the forty to one hundred sixty character range.",
   pubDate: new Date("2026-06-01"),
-  tags: ["typescript", "astro"],
+  tags: ["typescript", "svelte"],
   draft: false,
   featured: false,
 };

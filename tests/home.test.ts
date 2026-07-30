@@ -45,9 +45,10 @@ describe("home page", () => {
     ).toBe("summary_large_image");
   });
 
-  it("ships only the shared client module script", () => {
-    const moduleScripts = root.querySelectorAll('script[type="module"]');
-    expect(moduleScripts.length).toBe(1);
+  it("ships the shared SvelteKit bootstrap", () => {
+    const bootstrap = root.querySelector("script:not([data-theme-bootstrap])");
+    expect(bootstrap?.text).toContain("kit.start");
+    expect(root.querySelector('link[rel="modulepreload"]')).not.toBeNull();
   });
 
   it("includes the shared pre-paint theme bootstrap", () => {
@@ -96,18 +97,15 @@ describe("home page", () => {
     );
   });
 
-  it("adds sent and classic Messenger link messages after a choice", () => {
-    const scripts = Array.from(root.querySelectorAll("script:not([type])"))
-      .map((script) => script.text)
-      .join("\n");
-    expect(scripts).toContain("message--sent");
-    expect(scripts).toContain("message-link");
-    expect(scripts).toContain('matchMedia("(prefers-reduced-motion: reduce)")');
-    expect(scripts).toContain("target=\"_blank\"");
+  it("exposes interactive Messenger controls", () => {
+    expect(root.querySelectorAll("button[data-social-choice]").length).toBe(3);
+    expect(root.querySelector("button[data-lang-toggle]")).not.toBeNull();
+    expect(root.querySelector("a.message-link[target=\"_blank\"]")).toBeNull();
   });
 
-  it("styles messages inserted at runtime without Astro scope attributes", () => {
-    expect(css).toMatch(/\.conversation\[data-astro-cid-[^\]]+\] \.message-meta/);
-    expect(css).not.toMatch(/\.message-meta\[data-astro-cid-/);
+  it("ships scoped Svelte styles for message content", () => {
+    expect(css).toContain(".conversation");
+    expect(css).toContain(".message-meta");
+    expect(css).not.toMatch(/data-[a-z]+-cid/);
   });
 });
