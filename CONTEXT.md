@@ -1,41 +1,34 @@
 # Portfolio — Domain Language
 
-Personal portfolio site for Davi Oliveira. SSG with Astro 5, MDX content, deployed on Cloudflare Pages.
+Personal portfolio site for Davi Oliveira. It is a statically generated
+SvelteKit site with MDX content, deployed on Cloudflare Pages.
 
 ## Language
 
-**Project**:
-A showcase entry — an OSS or personal project with tech stack, links (repo, demo, post), and build-time stats. Has statuses: active, maintained, archived, wip. Roles: creator, maintainer, contributor.
-_Avoid_: repository, repo, app
+**Project**: A showcase entry with a stack, links, and optional build-time
+statistics. Statuses are `active`, `maintained`, `archived`, and `wip`; roles
+are `creator`, `maintainer`, and `contributor`.
 
-**Post**:
-A blog article with title, description, pubDate, tags, and draft/featured flags. Content lives in MDX.
-_Avoid_: article, entry, blog post
+**Post**: A blog post with title, description, publication date, tags, and
+draft/featured flags. Content lives in MDX.
 
-**Collection**:
-An Astro content collection backed by MDX glob loaders. Two exist: `blog` and `projects`.
-_Avoid_: dataset, index
+**Collection**: The content modules under `src/content/blog` and
+`src/content/projects`, discovered by the SvelteKit/mdsvex content boundary.
 
-**Enrichment**:
-Build-time injection of GitHub API data (stars, forks, lastCommit) into project entries. Non-blocking, cached.
-_Avoid_: fetch, sync, augmentation
+**Enrichment**: Optional build-time injection of GitHub API data (stars, forks,
+and last commit) into project entries. It degrades when no token is present.
 
-**Entry**:
-A single item within a collection — combines an `id` (slug) with `data` (the schema shape).
-_Avoid_: item, record, row
+**Entry**: A single collection value with an `id` slug and a validated `data`
+object.
 
-**Card**:
-A presentational component that renders a single Entry (ProjectCard, BlogCard). Stateless, receives data via props.
-_Avoid_: tile, preview
+**Card**: A stateless presentational component that renders one project or post
+entry.
 
-**Section**:
-A presentational wrapper that renders a grid of Cards (FeaturedProjects, RecentPosts). Conditional rendering: hides if empty.
-_Avoid_: list, container
+**Section**: A presentational wrapper for a group of cards. Empty sections are
+hidden.
 
-**Accessor**:
-A data-fetching module that calls `getCollection`, strips MDX extensions, maps entries, and delegates to a pick/filter function.
-_Avoid_: loader, fetcher, repository
+**Accessor**: A data module that discovers, validates, filters, and sorts
+content entries without coupling page components to frontmatter parsing.
 
-**Pick function**:
-A pure filter-sort-slice function (pickFeaturedProjects, pickRecentPosts). No I/O, no framework dependency. The only business logic in the codebase.
-_Avoid_: filter, selector, query
+**Pick function**: A pure filter/sort function such as `listProjects` or
+`listPosts`. These are the only business rules that do not perform I/O.

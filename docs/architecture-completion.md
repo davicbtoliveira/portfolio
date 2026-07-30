@@ -1,20 +1,10 @@
 # Architecture Completion
 
-The closed portfolio architecture is implemented as a static Astro site:
+The portfolio is a statically generated SvelteKit site with MDX content,
+validated metadata, Cloudflare Pages deployment, RSS, sitemap, robots output,
+and build-time OG images.
 
-- Home page
-- About page
-- Projects index and project detail pages
-- Blog index and blog post pages
-- Now and uses pages
-- Styled 404 page
-- RSS feed
-- Sitemap and robots outputs
-- Generated OG images for blog posts and projects
-- Optional GitHub project enrichment at build time
-- Cloudflare Pages deployment workflow
-
-## Local Commands
+## Local commands
 
 ```bash
 pnpm install --frozen-lockfile
@@ -24,40 +14,20 @@ pnpm build
 pnpm preview
 ```
 
-CI runs the same validation path through GitHub Actions before deploying to
-Cloudflare Pages.
+The GitHub Actions workflow runs the same check, test, and build path before a
+Cloudflare Pages preview or production deploy.
 
-## Production Workflow
+## Runtime boundaries
 
-Pull requests build and can deploy Cloudflare Pages previews when the required
-Cloudflare secrets are configured. Pushes to `main` deploy production from the
-static `dist` output. See `docs/deployment.md` for required secrets and manual
-Cloudflare dashboard steps.
+- Content is validated in `src/lib/content.ts` through Zod schemas.
+- Draft posts are excluded from public HTML, RSS, sitemap, OG routes, and post
+  detail pages.
+- Project-to-post relationships remain source-of-truth in project frontmatter.
+- GitHub enrichment is optional and degrades without credentials or API data.
+- Shared theme and navigation behavior is implemented with Svelte components;
+  static pages remain server-rendered HTML.
 
-## Architecture Notes
+## Deferred features
 
-- Content remains MDX committed in git.
-- Blog drafts are excluded from public HTML, RSS, sitemap, and post detail
-  routes.
-- Project-to-post relationships stay source-of-truth on project frontmatter via
-  `relatedPosts`.
-- GitHub stats enrichment is optional and degrades when `GITHUB_TOKEN` or API
-  responses are unavailable.
-- Runtime JS remains limited to shared navigation/theme behavior.
-
-## Deferred Features
-
-These remain intentionally out of scope from `ARCHITECTURE.md`:
-
-- search
-- comments
-- newsletter
-- i18n
-- series
-- categories
-- `/cv`
-- PWA/service worker
-- webmentions
-
-Revisit search only after the blog exceeds 25 posts. Revisit comments only if
-the site becomes community-oriented.
+search, comments, newsletter, full i18n, series, categories, `/cv`,
+PWA/service worker, and webmentions remain intentionally out of scope.
